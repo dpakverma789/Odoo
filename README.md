@@ -1,0 +1,2 @@
+# Odoo
+odoo practise
