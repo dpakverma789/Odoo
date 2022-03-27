@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="school_student_class_form_tree_view" model="ir.ui.view">
+        <field name="name">school_student_class_form_tree_view</field>
+        <field name="model">school.student.class</field>
+        <field name="arch" type="xml">
+            <tree string="school_class_subject_tree_data">
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <field name="division_id"/>
+                <field name="subject_ids"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="school_student_class_form_view" model="ir.ui.view">
+        <field name="name">school_student_class_form_view</field>
+        <field name="model">school.student.class</field>
+        <field name="arch" type="xml">
+            <form string="school_student_class_form_data">
+                <header>
+                    <button name="%(school.action_student_subject_wizard)d" string="create subject wizard" type="action" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="class_id"/>
+                    </group>
+                    <group>
+                        <field name="division_id"/>
+                        <field name="subject_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_school_student_class" model="ir.actions.act_window">
+        <field name="name">school_student_class</field>
+        <field name="res_model">school.student.class</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Student Class Subject Details Here!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="school_student_class" name="Student(Class)" parent="school_main_menu" action="action_school_student_class"/>
+
+</odoo>

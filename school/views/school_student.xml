@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="school_student_tree_view" model="ir.ui.view">
+        <field name="name">school_student_tree_view</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <tree string="school_student_tree_data">
+                <field name="roll_no"/>
+                <field name="student_name"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
+                <field name="parent_name"/>
+                <field name="student_history_ids"/>
+                <field name="street"/>
+                <field name="zip"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="country_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="school_student_form_view" model="ir.ui.view">
+        <field name="name">school_student_form_view</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <form string="school_class_form_data">
+                <sheet>
+                    <group>
+                        <field name="roll_no"/>
+                        <field name="student_name"/>
+                    </group>
+                    <group>
+                        <field name="date_of_birth"/>
+                        <field name="age"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="street"/>
+                            <field name="zip"/>
+                        </group>
+                        <group>
+                            <field name="city"/>
+                            <field name="state_id"/>
+                            <field name="country_id"/>
+                        </group>
+                        <field name="parent_name"/>
+                        <field name="student_history_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_school_student" model="ir.actions.act_window">
+        <field name="name">Student_Details</field>
+        <field name="res_model">school.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Student Details Here!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="school_student" name="Details" parent="school_main_menu" action="action_school_student"/>
+
+</odoo>

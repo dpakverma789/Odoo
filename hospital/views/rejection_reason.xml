@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rejection_reason_form" model="ir.ui.view">
+        <field name="name">appointment.rejection.reason.form</field>
+        <field name="model">appointment.rejection.reason</field>
+        <field name="arch" type="xml">
+            <form string="rejection_reason_details">
+                <sheet>
+                    <group>
+                        <field name="rejection_reason"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="rejection_reason_tree" model="ir.ui.view">
+        <field name="name">appointment.rejection.reason.tree</field>
+        <field name="model">appointment.rejection.reason</field>
+        <field name="arch" type="xml">
+            <tree string="rejection_reason_details">
+                <field name="rejection_reason"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="rejection_reason_action" model="ir.actions.act_window">
+        <field name="name">Rejection Reason</field>
+        <field name="res_model">appointment.rejection.reason</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create First Rejection Reason!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hospital_root_menu" name="Hospital"/>
+    <menuitem id="hospital_rejection_reason_menu" name="Rejection Reasons" parent="hospital_root_menu"
+              action="rejection_reason_action"/>
+</odoo>

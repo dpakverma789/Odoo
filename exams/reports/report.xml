@@ -1,0 +1,10 @@
+<odoo>
+    <!--
+    model: model where print button needed
+    name: module_name.template_name
+    file: module_name.template_name
+    -->
+    <report id="exam_marks_card" string="exam card" model="exam.wizard"
+            report_type="qweb-pdf" name="exams.exam_report" file="exams.exam_report">
+    </report>
+</odoo>

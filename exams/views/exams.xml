@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- tree view for class record-->
+     <!-- record model is always same "ir.ui.view" for model layout-->
+    <record id="student_exams_tree" model="ir.ui.view">
+        <field name="name">student.exams.tree</field>
+        <field name="model">student.exams</field>
+        <field name="arch" type="xml">
+            <tree string="exam_details_tree">
+                <!-- data to be shown in the class menu in tree format-->
+                <field name="mark_subject_1"/>
+                <field name="student_ids"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- form view for class record-->
+    <record id="student_exams_form" model="ir.ui.view">
+        <field name="name">student.exams.form</field>
+        <field name="model">student.exams</field>
+        <field name="arch" type="xml">
+            <form string="exam_details_form">
+                <header>
+                    <button name="%(exams.create_exam_wizard)d" string="check exam" type="action" class="oe_highlight"/>
+                </header>
+                <!-- data to be shown in the class menu in form format-->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="mark_subject_1"/>
+                        </group>
+                        <group>
+                            <field name="student_ids"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+                 <!--- action record for menu's-->
+
+    <!--action record for the student name and class-->
+     <!-- record id is called in action of the menu and model is always same "ir.actions.act_window"-->
+    <record id="action_student_exams" model="ir.actions.act_window">
+        <field name="name">exams</field> <!-- this name is shown in UI menu for user above create/import button-->
+        <field name="res_model">student.exams</field> <!--this define action function for specific model whose name is define here-->
+        <field name="view_mode">tree,form</field> <!--it represent the model view how it should look for user -->
+        <field name="help" type="html"> <!-- when the is no data in this menu it shown the icon with message declare in p tag-->
+            <p class="o_view_nocontent_smiling_face">
+                Enter First exam Details
+            </p>
+        </field>
+    </record>
+
+
+    <!--
+    menuitme-tag: create the menu for the help of user to select menu
+    id: is given to taget particular tag
+    name: this is the name of menu shown to the user in UI
+    sequence: this put the menu top/middle/bottom of other menu according to the sequence of this and other menu
+               less sequence number menu will be in top and vice-versa
+    parenet: this make the current menu behave as a child menu of other menu referred by the id in this tag
+    action: when user click in this menu action refered to its record where its representation is define
+    -->
+    <menuitem id="student_main_menu" name="Exam Manager" sequence="4"/>
+    <menuitem id="student_exams" name="exams" parent="student_main_menu" action="action_student_exams"/>
+
+
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="patient_appointment_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="container">
+                    <h2 class="text-center">Appointment Card</h2>
+                    <table class="table table-bordered h6" style="margin:auto;width:80%">
+                        <tbody class="text-left">
+                            <tr>
+                                <td>
+                                    <b>Appointment Number#:</b>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.name"/>
+                                </td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>
+                                    <b>Patient Name:</b>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.patient_id.patient_name"/>
+                                </td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>
+                                    <b>Doctor Name:</b>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.doctor_id.doctor_name"/>
+                                </td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>
+                                    <b>Doctor Specialisation:</b>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.doctor_specialization"/>
+                                </td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>
+                                    <b>Appointment Time:</b>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.appointment_time"/>
+                                </td>
+                            </tr>
+                            <br/>
+                            <tr>
+                                <td>
+                                    <b>Appointment Status:</b>
+                                </td>
+                                <td>
+                                    <t t-esc="doc.appointment_state"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <report id="patient_appointment_report"
+            string="Appointment Receipt"
+            model="hospital.appointment"
+            report_type="qweb-pdf"
+            menu="False"
+            name="hospital.patient_appointment_card"
+            file="hospital.patient_appointment_card">
+    </report>
+
+</odoo>

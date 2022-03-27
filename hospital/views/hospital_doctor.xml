@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hospital_doctor_tree" model="ir.ui.view">
+        <field name="name">hospital.doctor.tree</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <tree string="hospital_doctor_details">
+                <field name="doctor_name"/>
+                <field name="doctor_specialization"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hospital_doctor_form" model="ir.ui.view">
+        <field name="name">hospital.doctor.form</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <form string="hospital_doctor_details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="doctor_name"/>
+                            <field name="doctor_specialization"/>
+                        </group>
+                        <field name="patient_appointment_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospital_doctor_action" model="ir.actions.act_window">
+        <field name="name">Hospital Doctor</field>
+        <field name="res_model">hospital.doctor</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create First Doctor Details!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hospital_doctor_menu"
+              name="Doctors"
+              parent="hospital_root_menu"
+              action="hospital_doctor_action"/>
+</odoo>

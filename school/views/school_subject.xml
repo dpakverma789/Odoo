@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="school_subject_tree_view" model="ir.ui.view">
+        <field name="name">school_subject_tree_view</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <tree string="school_subject_tree_data">
+                <field name="subject_name"/>
+                <field name="subject_code"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="school_subject_form_view" model="ir.ui.view">
+        <field name="name">school_subject_form_view</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <form string="school_subject_form_data">
+                <sheet>
+                   <group>
+                       <field name="subject_name"/>
+                       <field name="subject_code"/>
+                       <field name="toggle" widget="boolean_toggle"/>
+                   </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_school_subject" model="ir.actions.act_window">
+        <field name="name">Subject</field>
+        <field name="res_model">school.subject</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create subject Details Here!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="school_main_menu" name="School" sequence="2"/>
+    <menuitem id="school_subject" name="Subject" parent="school_main_menu" action="action_school_subject"/>
+
+</odoo>

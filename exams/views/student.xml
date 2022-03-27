@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <record id="student_data_pivot" model="ir.ui.view">
+        <field name="name">student.data.pivot</field>
+        <field name="model">student.data</field>
+        <field name="arch" type="xml">
+            <pivot string="student_data_pivot">
+                <!-- data to be shown in the class menu in tree format-->
+                <field name="studentName"/>
+                <field name="studentClass"/>
+                <field name="subject_id"/>
+                <field name="marks_id"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="student_data_graph" model="ir.ui.view">
+        <field name="name">student.data.graph</field>
+        <field name="model">student.data</field>
+        <field name="arch" type="xml">
+            <graph string="student_data_graph">
+                <!-- data to be shown in the class menu in tree format-->
+                <field name="studentName"/>
+                <field name="studentClass"/>
+                <field name="subject_id"/>
+                <field name="marks_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- tree view for class record-->
+     <!-- record model is always same "ir.ui.view" for model layout-->
+    <record id="student_data_tree" model="ir.ui.view">
+        <field name="name">student.data.tree</field>
+        <field name="model">student.data</field>
+        <field name="arch" type="xml">
+            <tree string="student_data_tree">
+                <!-- data to be shown in the class menu in tree format-->
+                <field name="studentName"/>
+                <field name="studentClass"/>
+                <field name="subject_id"/>
+                <field name="marks_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- form view for class record-->
+    <record id="student_data_form" model="ir.ui.view">
+        <field name="name">student.data.form</field>
+        <field name="model">student.data</field>
+        <field name="arch" type="xml">
+            <form string="student_data_form">
+                <!-- data to be shown in the class menu in form format-->
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="studentName"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="studentName"/>
+                            <field name="studentClass"/>
+                        </group>
+                        <group>
+                            <field name="subject_id"/>
+                            <field name="marks_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+                 <!--- action record for menu's-->
+
+    <!--action record for the student name and class-->
+     <!-- record id is called in action of the menu and model is always same "ir.actions.act_window"-->
+    <record id="action_student_data" model="ir.actions.act_window">
+        <field name="name">Student_data</field> <!-- this name is shown in UI menu for user above create/import button-->
+        <field name="res_model">student.data</field> <!--this define action function for specific model whose name is define here-->
+        <field name="view_mode">tree,form,pivot,graph</field> <!--it represent the model view how it should look for user -->
+        <field name="help" type="html"> <!-- when the is no data in this menu it shown the icon with message declare in p tag-->
+            <p class="o_view_nocontent_smiling_face">
+                Enter First Student Details
+            </p>
+        </field>
+    </record>
+
+
+    <!--
+    menuitme-tag: create the menu for the help of user to select menu
+    id: is given to taget particular tag
+    name: this is the name of menu shown to the user in UI
+    sequence: this put the menu top/middle/bottom of other menu according to the sequence of this and other menu
+               less sequence number menu will be in top and vice-versa
+    parenet: this make the current menu behave as a child menu of other menu referred by the id in this tag
+    action: when user click in this menu action refered to its record where its representation is define
+    -->
+    <menuitem id="student_main_menu" name="Exam Manager" sequence="4"/>
+    <menuitem id="Student_data" name="student" parent="student_main_menu" action="action_student_data"/>
+
+
+</odoo>

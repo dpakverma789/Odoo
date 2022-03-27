@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- tree view for class record-->
+     <!-- record model is always same "ir.ui.view" for model layout-->
+    <record id="student_sub_tree" model="ir.ui.view">
+        <field name="name">student.sub.tree</field>
+        <field name="model">student.sub</field>
+        <field name="arch" type="xml">
+            <tree string="student_sub_tree">
+                <!-- data to be shown in the class menu in tree format-->
+                <field name="subject1"/>
+                <field name="student_marks_ids"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- form view for class record-->
+    <record id="student_sub_form" model="ir.ui.view">
+        <field name="name">student.sub.form</field>
+        <field name="model">student.sub</field>
+        <field name="arch" type="xml">
+            <form string="student_sub_form">
+                <!-- data to be shown in the class menu in form format-->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="subject1"/>
+                        </group>
+                        <group>
+                            <field name="student_marks_ids"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+                 <!--- action record for menu's-->
+
+    <!--action record for the student name and class-->
+     <!-- record id is called in action of the menu and model is always same "ir.actions.act_window"-->
+    <record id="action_student_sub" model="ir.actions.act_window">
+        <field name="name">student_sub</field> <!-- this name is shown in UI menu for user above create/import button-->
+        <field name="res_model">student.sub</field> <!--this define action function for specific model whose name is define here-->
+        <field name="view_mode">tree,form</field> <!--it represent the model view how it should look for user -->
+        <field name="help" type="html"> <!-- when the is no data in this menu it shown the icon with message declare in p tag-->
+            <p class="o_view_nocontent_smiling_face">
+                Enter First subject Details
+            </p>
+        </field>
+    </record>
+
+
+    <!--
+    menuitme-tag: create the menu for the help of user to select menu
+    id: is given to taget particular tag
+    name: this is the name of menu shown to the user in UI
+    sequence: this put the menu top/middle/bottom of other menu according to the sequence of this and other menu
+               less sequence number menu will be in top and vice-versa
+    parenet: this make the current menu behave as a child menu of other menu referred by the id in this tag
+    action: when user click in this menu action refered to its record where its representation is define
+    -->
+    <menuitem id="student_main_menu" name="Exam Manager" sequence="4"/>
+    <menuitem id="student_sub" name="subject" parent="student_main_menu" action="action_student_sub"/>
+
+</odoo>

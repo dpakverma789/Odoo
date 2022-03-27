@@ -1,0 +1,29 @@
+
+<odoo>
+    <record id="create_exam_wizard_form" model="ir.ui.view">
+        <field name="name">exam_wizard_form</field>
+        <field name="model">exam.wizard</field>
+        <field name="arch" type="xml">
+            <form string="create data">
+                <group >
+                    <field name="student_name"/>
+                    <field name="student_class"/>
+                    <field name="student_subject"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="print" type="object" class="btn-primary"/>
+                    <button string="cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="create_exam_wizard" model="ir.actions.act_window">
+        <field name="name">Exam Card</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">exam.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="create_exam_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

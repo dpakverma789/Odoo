@@ -1,0 +1,23 @@
+
+<odoo>
+    <record id="student_student_rule" model="ir.rule">
+        <field name="name">student_student_rule</field>
+        <field name="model_id" ref="model_student_student"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('create_uid','=',False),('create_uid', '=', user.id)]</field>
+    </record>
+
+     <record id="student_fee_rule" model="ir.rule">
+        <field name="name">student_fee_rule</field>
+        <field name="model_id" ref="model_student_fee"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('create_uid','=',False),('create_uid', '=', user.id)]</field>
+    </record>
+
+     <record id="student_subject_rule" model="ir.rule">
+        <field name="name">student_subject_rule</field>
+        <field name="model_id" ref="model_student_subject"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('create_uid','=',False),('create_uid', '=', user.id)]</field>
+    </record>
+</odoo>

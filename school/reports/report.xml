@@ -1,0 +1,9 @@
+<odoo>
+        <report
+                id="report_student_card"
+                string="student card"
+                model="school.student"
+                report_type="qweb-pdf"
+                name="school.student_card"
+                file="school.student_card"/>
+</odoo>

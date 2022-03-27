@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="school_exams_tree_view" model="ir.ui.view">
+        <field name="name">school_exams_tree_view</field>
+        <field name="model">school.exams</field>
+        <field name="arch" type="xml">
+            <tree string="school_exams_tree_data">
+                  <field name="exam_name"/>
+                  <field name="class_subject"/>
+                  <field name="school_year"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="school_exams_form_view" model="ir.ui.view">
+        <field name="name">school_exams_form_view</field>
+        <field name="model">school.exams</field>
+        <field name="arch" type="xml">
+            <form string="school_exams_form_data">
+                <sheet>
+                   <group>
+                       <field name="exam_name"/>
+                       <field name="class_subject"/>
+                       <field name="school_year"/>
+                   </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_school_exams" model="ir.actions.act_window">
+        <field name="name">Exams</field>
+        <field name="res_model">school.exams</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create Exams Details Here!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="school_exams" name="Exams" parent="school_main_menu" action="action_school_exams"/>
+
+</odoo>
