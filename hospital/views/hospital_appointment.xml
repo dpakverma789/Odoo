@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- Tree View  -->
     <record id="hospital_appointment_tree" model="ir.ui.view">
         <field name="name">hospital.appointment.tree</field>
         <field name="model">hospital.appointment</field>
@@ -16,6 +17,7 @@
         </field>
     </record>
 
+    <!-- Form View  -->
     <record id="hospital_appointment_form" model="ir.ui.view">
         <field name="name">hospital.appointment.form</field>
         <field name="model">hospital.appointment</field>
@@ -27,8 +29,11 @@
                             groups="hospital.group_hospital_doctor"
                             type="object" class="oe_highlight"
                             attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>
-                    <button name="%(hospital.action_hospital_appointment_request_wizard)d" string="Reject"
-                            type="action" groups="hospital.group_hospital_doctor"
+<!--                    <button name="%(hospital.action_hospital_appointment_request_wizard)d" string="Reject"-->
+<!--                            type="action" groups="hospital.group_hospital_doctor"-->
+<!--                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>-->
+                    <button name="rejection_reason_wizard" string="Reject"
+                            type="object" groups="hospital.group_hospital_doctor"
                             attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>
                     <button name="print_patient_appointment_card"
                             string="Print Appointment Card"
@@ -65,6 +70,7 @@
         </field>
     </record>
 
+    <!-- Search View  -->
     <record id="hospital_appointment_search" model="ir.ui.view">
         <field name="name">hospital.appointment.search</field>
         <field name="model">hospital.appointment</field>
@@ -82,6 +88,7 @@
         </field>
     </record>
 
+    <!-- Graph View  -->
     <record id="hospital_appointment_graph" model="ir.ui.view">
         <field name="name">hospital.appointment.graph</field>
         <field name="model">hospital.appointment</field>
@@ -96,6 +103,7 @@
         </field>
     </record>
 
+    <!-- Calender View  -->
     <record id="hospital_appointment_calendar" model="ir.ui.view">
         <field name="name">hospital.appointment.calendar</field>
         <field name="model">hospital.appointment</field>
@@ -110,6 +118,7 @@
         </field>
     </record>
 
+    <!-- Action window View  -->
     <record id="hospital_appointment_action" model="ir.actions.act_window">
         <field name="name">Hospital Appointment</field>
         <field name="res_model">hospital.appointment</field>
@@ -122,8 +131,10 @@
         </field>
     </record>
 
+    <!-- Appointment Main Menu  -->
     <menuitem id="hospital_appointment_menu"
               name="Appointments"
               parent="hospital_root_menu"
               action="hospital_appointment_action"/>
+
 </odoo>

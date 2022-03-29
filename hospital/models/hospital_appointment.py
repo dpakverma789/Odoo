@@ -33,12 +33,14 @@ class HospitalAppointment(models.Model):
                 raise ValidationError(_('Already have Appointment!, Try 15 min Later'))
         self.appointment_state = 'confirmed'
 
+    # overriding delete function to check condition before deleting records
     def unlink(self):
         for rec in self:
             if rec.appointment_state == 'confirmed':
                 raise ValidationError(_('Can not Delete Confirmed Appointment'))
         return super(HospitalAppointment, self).unlink()
 
+    # overriding create method [vals are all fields from current model]
     @api.model
     def create(self, vals):
         if vals.get('name', _('New')) == _('New'):
@@ -46,11 +48,25 @@ class HospitalAppointment(models.Model):
         res = super(HospitalAppointment, self).create(vals)
         return res
 
+    # printing report
     def print_patient_appointment_card(self):
         return self.env.ref('hospital.patient_appointment_report').report_action(self)
 
+    # onchange function which depends on patient_id to change patient gender
     @api.onchange('patient_id')
     def _onchange_patient_gender(self):
         if self.patient_id and self.patient_id.patient_gender:
             self.patient_gender = self.patient_id.patient_gender
 
+    # wizard call using python function
+    def rejection_reason_wizard(self):
+        wizard_view = {
+            'name': _('Rejection Reason'),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_model': 'hospital.appointment.request.wizard',
+            'view_id': self.env.ref('hospital.hospital_appointment_request_wizard').id,
+            'target': 'new',
+        }
+        return wizard_view
