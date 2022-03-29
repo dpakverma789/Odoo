@@ -18,7 +18,7 @@
             <form string="hospital_doctor_details">
                 <sheet>
                     <div name="button_box" class="oe_button_box">
-                        <button class="oe_stat_button" disabled="True" icon="fa-check-square-o">
+                        <button class="oe_stat_button" disabled="True" icon="fa-list">
                             <div class="o_stat_info">
                                 <span class="o_stat_text" style="font-size:12px">Appointments
                                     <strong>
@@ -32,7 +32,6 @@
                         <group>
                             <field name="doctor_name"/>
                             <field name="doctor_specialization"/>
-                            <field name="total_appointment"/>
                         </group>
                         <field name="patient_appointment_ids"/>
                     </group>

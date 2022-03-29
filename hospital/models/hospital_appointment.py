@@ -34,8 +34,9 @@ class HospitalAppointment(models.Model):
         self.appointment_state = 'confirmed'
 
     def unlink(self):
-        if self.appointment_state == 'confirmed':
-            raise ValidationError(_('Can not Delete Confirmed Appointment'))
+        for rec in self:
+            if rec.appointment_state == 'confirmed':
+                raise ValidationError(_('Can not Delete Confirmed Appointment'))
         return super(HospitalAppointment, self).unlink()
 
     @api.model
