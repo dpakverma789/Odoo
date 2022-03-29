@@ -80,7 +80,7 @@ class HospitalAppointment(models.Model):
     def update_image(self):
         records_ids = self.search([])
         for rec in records_ids:
-            if rec.patient_id.patient_image and not bool(rec.image):
+            if rec.image != rec.patient_id.patient_image:
                 rec.image = rec.patient_id.patient_image
         del records_ids
         return
