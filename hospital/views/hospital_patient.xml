@@ -5,7 +5,7 @@
         <field name="name">hospital.patient.tree</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
-            <tree string="hospital_patient_details">
+            <tree string="hospital_patient_details" sample="1">
                 <field name="patient_name"/>
                 <field name="patient_age"/>
                 <field name="patient_contact"/>
@@ -22,9 +22,13 @@
             <form string="hospital_patient_details">
                 <sheet>
                     <field name="patient_image" widget='image' class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="patient_name"/>
+                        </h1>
+                    </div>
                     <group>
                         <group>
-                            <field name="patient_name"/>
                             <field name="patient_age"/>
                             <field name="patient_contact"/>
                             <field name="patient_gender"/>
@@ -59,7 +63,7 @@
         <field name="name">hospital.patient.kanban</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
-            <kanban class="o_kanban_mobile">
+            <kanban class="o_kanban_mobile" sample="1">
                 <field name="patient_name"/>
                 <field name="patient_age"/>
                 <field name="patient_contact"/>
