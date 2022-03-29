@@ -12,6 +12,7 @@ class HospitalDoctor(models.Model):
     patient_appointment_ids = fields.One2many('hospital.appointment', inverse_name='doctor_id',
                                               string='Appointments', readonly=True)
     total_appointment = fields.Integer('Total Appointment', compute='_compute_total_appointment')
+    doctor_image = fields.Binary("Image")
 
     @api.depends('patient_appointment_ids')
     def _compute_total_appointment(self):

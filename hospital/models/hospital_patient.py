@@ -13,3 +13,4 @@ class HospitalPatient(models.Model):
     patient_gender = fields.Selection([('male', 'Male'), ('female', 'Female')])
     appointment_ids = fields.One2many('hospital.appointment', inverse_name='patient_id',
                                       string='Appointments', readonly=True)
+    patient_image = fields.Binary("Image")

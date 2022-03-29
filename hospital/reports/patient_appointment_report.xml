@@ -76,13 +76,26 @@
         </t>
     </template>
 
-    <report id="patient_appointment_report"
-            string="Appointment Receipt"
-            model="hospital.appointment"
-            report_type="qweb-pdf"
-            menu="False"
-            name="hospital.patient_appointment_card"
-            file="hospital.patient_appointment_card">
-    </report>
+        <!-- This tag is deprecated    -->
+<!--    <report id="patient_appointment_report"-->
+<!--            string="Appointment Receipt"-->
+<!--            model="hospital.appointment"-->
+<!--            report_type="qweb-pdf"-->
+<!--            menu="False"-->
+<!--            name="hospital.patient_appointment_card"-->
+<!--            file="hospital.patient_appointment_card">-->
+<!--    </report>-->
+
+
+    <record id="patient_appointment_report" model="ir.actions.report">
+        <field name="name">Appointment Receipt</field>
+        <field name="model">hospital.appointment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hospital.patient_appointment_card</field>
+        <field name="report_file">hospital.patient_appointment_card</field>
+        <field name="print_report_name">'%s - %s' % (object.patient_id.patient_name,object.name)</field>
+<!--        <field name="binding_model_id" ref="model_purchase_order"/>-->
+<!--        <field name="binding_type">report</field>-->
+    </record>
 
 </odoo>
