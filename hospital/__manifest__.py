@@ -14,6 +14,7 @@
         'wizard/appointment_request_wizard.xml',
         'reports/patient_appointment_report.xml',
         'data/appointment_sequence.xml',
+        'data/cron.xml',
         'views/patient_form_template.xml',
         'views/hospital_patient.xml',
         'views/hospital_appointment.xml',

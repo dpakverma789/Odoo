@@ -5,7 +5,7 @@
         <field name="name">hospital.appointment.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree string="hospital_appointment_details">
+            <tree string="hospital_appointment_details" multi_edit="1">
                 <header>
                     <button name="print_patient_appointment_card"
                             string="Print Appointment Card"
