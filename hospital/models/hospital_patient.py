@@ -6,6 +6,7 @@ class HospitalPatient(models.Model):
     _name = "hospital.patient"
     _rec_name = 'patient_name'
     _description = "hospital.patient"
+    _order = 'patient_name'
 
     patient_name = fields.Char('Patient Name', required=True, default='Odoo')
     patient_age = fields.Integer('Patient Age')

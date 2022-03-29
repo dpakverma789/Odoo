@@ -6,6 +6,7 @@ class HospitalDoctor(models.Model):
     _name = "hospital.doctor"
     _rec_name = 'doctor_name'
     _description = "hospital.doctor"
+    _order = 'doctor_name'
 
     doctor_name = fields.Char('Doctor Name', required=True)
     doctor_specialization = fields.Char('Specialization', required=True)

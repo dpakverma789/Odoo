@@ -52,6 +52,7 @@
                             <field name="name" readonly="1"/>
                         </h1>
                     </div>
+                    <field name="image" widget='image' class="oe_avatar"/>
                     <group>
                         <group>
                             <field name="patient_id"/>
@@ -72,6 +73,50 @@
                     <field name="message_ids"/>
                 </div>
             </form>
+        </field>
+    </record>
+
+    <!-- Kanban -->
+    <record id="hospital_appointment_kanban" model="ir.ui.view">
+        <field name="name">hospital.appointment.kanban</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="image"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="appointment_time"/>
+                <field name="appointment_state"/>
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="float-left">
+                                <img t-att-src="kanban_image('hospital.appointment', 'image', record.id.raw_value)"
+                                     t-att-title="image" t-att-alt="image"
+                                     class="rounded oe_kanban_avatar o_image_24_cover"
+                                     style="width:70px!important;height:70px!important"/>
+                            </div>
+                            <div class="row mb4">
+                                <strong class="col-6">
+                                    <field name="name"/>
+                                </strong>
+                                <strong class="col-6 text-right">
+                                    <i class="fa fa-calendar" aria-label="Date" role="img" title="Date"/>
+                                    <field name="appointment_time"/>
+                                </strong>
+                                <div class="col-6">
+                                    <field name="patient_id"/>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <field name="appointment_state"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -127,7 +172,7 @@
     <record id="hospital_appointment_action" model="ir.actions.act_window">
         <field name="name">Hospital Appointment</field>
         <field name="res_model">hospital.appointment</field>
-        <field name="view_mode">tree,form,graph,calendar</field>
+        <field name="view_mode">tree,form,kanban,graph,calendar</field>
         <field name="context">{'default_patient_description':'No Description'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

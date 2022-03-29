@@ -8,6 +8,7 @@
             <tree string="hospital_doctor_details">
                 <field name="doctor_name"/>
                 <field name="doctor_specialization"/>
+                <field name="total_appointment" optional="hide"/>
             </tree>
         </field>
     </record>
@@ -47,7 +48,7 @@
         </field>
     </record>
 
-    <!-- Kanband -->
+    <!-- Kanban -->
     <record id="hospital_doctor_kanban" model="ir.ui.view">
         <field name="name">hospital.doctor.kanban</field>
         <field name="model">hospital.doctor</field>
