@@ -7,7 +7,7 @@ class HospitalPatient(models.Model):
     _rec_name = 'patient_name'
     _description = "hospital.patient"
 
-    patient_name = fields.Char('Patient Name', required=True)
+    patient_name = fields.Char('Patient Name', required=True, default='Odoo')
     patient_age = fields.Integer('Patient Age')
     patient_contact = fields.Char('Patient Contact')
     patient_gender = fields.Selection([('male', 'Male'), ('female', 'Female')])

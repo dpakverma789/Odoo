@@ -6,17 +6,20 @@ from odoo.exceptions import ValidationError
 
 class HospitalAppointment(models.Model):
     _name = "hospital.appointment"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'patient_id'
     _description = "hospital.appointment"
 
     name = fields.Char('Appointment', required=True, copy=False, readonly=True, default=lambda self: _('New'))
     patient_id = fields.Many2one('hospital.patient', 'Patient Name', required=True)
+    patient_gender = fields.Char('Gender')
     doctor_id = fields.Many2one('hospital.doctor', 'Doctor Name', required=True)
     doctor_specialization = fields.Char('Specialization', related='doctor_id.doctor_specialization')
     appointment_time = fields.Datetime('Appointment Time', required=True)
     appointment_state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"),
                                           ('rejected', "Rejected")], string="Appointment Status", default='draft')
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
+    patient_description = fields.Text('Description')
 
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),
@@ -44,3 +47,9 @@ class HospitalAppointment(models.Model):
 
     def print_patient_appointment_card(self):
         return self.env.ref('hospital.patient_appointment_report').report_action(self)
+
+    @api.onchange('patient_id')
+    def _onchange_patient_gender(self):
+        if self.patient_id and self.patient_id.patient_gender:
+            self.patient_gender = self.patient_id.patient_gender
+

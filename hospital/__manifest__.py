@@ -7,7 +7,7 @@
     'maintainer': 'Deepak Verma',
     'support': 'Deepak Verma',
     'version': '1.0.0',
-    'depends': ['base', 'website'],
+    'depends': ['base', 'website', 'mail'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
