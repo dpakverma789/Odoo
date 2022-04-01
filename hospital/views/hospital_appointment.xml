@@ -5,7 +5,11 @@
         <field name="name">hospital.appointment.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree string="hospital_appointment_details" multi_edit="1">
+            <tree string="hospital_appointment_details"
+                  decoration-success="appointment_state=='confirmed'"
+                  decoration-danger="appointment_state=='rejected'"
+                  sample="1"
+                  multi_edit="1">
                 <header>
                     <button name="print_patient_appointment_card"
                             string="Print Appointment Card"

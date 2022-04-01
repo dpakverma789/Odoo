@@ -5,7 +5,7 @@
         <field name="name">hospital.doctor.tree</field>
         <field name="model">hospital.doctor</field>
         <field name="arch" type="xml">
-            <tree string="hospital_doctor_details">
+            <tree string="hospital_doctor_details" sample="1">
                 <field name="doctor_name"/>
                 <field name="doctor_specialization"/>
                 <field name="total_appointment" optional="hide"/>

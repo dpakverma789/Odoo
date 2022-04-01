@@ -33,8 +33,15 @@ class HospitalAppointment(models.Model):
             )
             if not all(conditions):
                 raise ValidationError(_('Already have Appointment!, Try 15 min Later'))
+            del all_appointment_ids, conditions
         self.appointment_state = 'confirmed'
-        del all_appointment_ids, conditions
+        return {
+            'effect': {
+                'fadeout': 'slow',
+                'message': 'This Appointment is Confirmed!',
+                'img_url': '/web/static/src/img/smile.svg',
+                'type': 'rainbow_man',
+            }}
 
     # overriding delete function to check condition before deleting records
     def unlink(self):
@@ -79,9 +86,10 @@ class HospitalAppointment(models.Model):
     # update image cron
     def update_image(self):
         records_ids = self.search([])
-        for rec in records_ids:
-            if rec.image != rec.patient_id.patient_image:
-                rec.image = rec.patient_id.patient_image
-        del records_ids
+        if records_ids:
+            for rec in records_ids:
+                if rec.image != rec.patient_id.patient_image:
+                    rec.image = rec.patient_id.patient_image
+            del records_ids
         return
 

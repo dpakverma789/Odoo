@@ -19,7 +19,7 @@
         <field name="name">appointment.rejection.reason.tree</field>
         <field name="model">appointment.rejection.reason</field>
         <field name="arch" type="xml">
-            <tree string="rejection_reason_details">
+            <tree string="rejection_reason_details" sample="1">
                 <field name="rejection_reason"/>
             </tree>
         </field>
