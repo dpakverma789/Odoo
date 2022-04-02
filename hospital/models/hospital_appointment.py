@@ -26,13 +26,14 @@ class HospitalAppointment(models.Model):
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),
                                            ('doctor_id', '=', self.doctor_id.id)])
-        for rec in all_appointment_ids:
-            conditions = (
-                    self.appointment_time > rec.appointment_time + timedelta(minutes=15),
-                    rec.appointment_time < self.appointment_time - timedelta(minutes=15)
-            )
-            if not all(conditions):
-                raise ValidationError(_('Already have Appointment!, Try 15 min Later'))
+        if all_appointment_ids:
+            for rec in all_appointment_ids:
+                conditions = (
+                        self.appointment_time > rec.appointment_time + timedelta(minutes=15),
+                        rec.appointment_time < self.appointment_time - timedelta(minutes=15)
+                )
+                if not all(conditions):
+                    raise ValidationError(_('Already have Appointment!, Try 15 min Later'))
             del all_appointment_ids, conditions
         self.appointment_state = 'confirmed'
         return {
