@@ -33,7 +33,8 @@ class HospitalAppointment(models.Model):
                         rec.appointment_time < self.appointment_time - timedelta(minutes=15)
                 )
                 if not all(conditions):
-                    raise ValidationError(_('Already have Appointment!, Try 15 min Later'))
+                    raise ValidationError(_('Dr. %s Already have Appointment! Try 15 min Later'
+                                            % self.doctor_id.doctor_name))
             del all_appointment_ids, conditions
         self.appointment_state = 'confirmed'
         return {
