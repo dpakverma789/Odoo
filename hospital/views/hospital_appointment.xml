@@ -48,7 +48,7 @@
                             string="Print Appointment Card"
                             type="object" class="oe_highlight"
                             attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
-                    <field name="appointment_state" widget="statusbar"/>
+                    <field name="appointment_state" widget="statusbar" statusbar_visible="draft,confirmed"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
