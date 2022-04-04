@@ -18,7 +18,7 @@
                                         </label>
                                         <div class="col-sm">
                                             <input id="contact1" type="text" class="form-control s_website_form_input"
-                                                   name="patient_name" required=""/>
+                                                   name="name" required=""/>
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                         </label>
                                         <div class="col-sm">
                                             <input id="contact2" type="text" class="form-control s_website_form_input"
-                                                   name="patient_age"/>
+                                                   name="age"/>
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                         </label>
                                         <div class="col-sm">
                                             <input id="contact3" type="text" class="form-control s_website_form_input"
-                                                   name="patient_contact" required=""/>
+                                                   name="contact" required=""/>
                                         </div>
                                     </div>
                                 </div>

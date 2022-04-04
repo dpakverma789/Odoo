@@ -6,10 +6,10 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <tree string="hospital_patient_details" sample="1">
-                <field name="patient_name"/>
-                <field name="patient_age"/>
-                <field name="patient_contact"/>
-                <field name="patient_gender"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="contact"/>
+                <field name="gender"/>
             </tree>
         </field>
     </record>
@@ -21,17 +21,17 @@
         <field name="arch" type="xml">
             <form string="hospital_patient_details">
                 <sheet>
-                    <field name="patient_image" widget='image' class="oe_avatar"/>
+                    <field name="image" widget='image' class="oe_avatar"/>
                     <div class="oe_title">
                         <h1>
-                            <field name="patient_name"/>
+                            <field name="name"/>
                         </h1>
                     </div>
                     <group>
                         <group>
-                            <field name="patient_age"/>
-                            <field name="patient_contact"/>
-                            <field name="patient_gender"/>
+                            <field name="age"/>
+                            <field name="contact"/>
+                            <field name="gender"/>
                         </group>
                         <field name="appointment_ids"/>
                     </group>
@@ -46,13 +46,13 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <search string="hospital_patient_search">
-                <field name="patient_name"/>
+                <field name="name"/>
                 <separator/>
-                <filter name="Male" string="Male" domain="[('patient_gender', '=', 'male')]"/>
+                <filter name="Male" string="Male" domain="[('gender', '=', 'male')]"/>
                 <separator/>
-                <filter name="Female" string="Female" domain="[('patient_gender', '=', 'female')]"/>
+                <filter name="Female" string="Female" domain="[('gender', '=', 'female')]"/>
                 <group expand="0" string="Group By">
-                    <filter name="patient_gender" string="Gender" context="{'group_by':'patient_gender'}"/>
+                    <filter name="gender" string="Gender" context="{'group_by':'gender'}"/>
                 </group>
             </search>
         </field>
@@ -64,33 +64,33 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile" sample="1">
-                <field name="patient_name"/>
-                <field name="patient_age"/>
-                <field name="patient_contact"/>
-                <field name="patient_gender"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="contact"/>
+                <field name="gender"/>
                 <field name="id"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="float-left">
-                                <img t-att-src="kanban_image('hospital.patient', 'patient_image', record.id.raw_value)"
-                                     t-att-title="patient_image" t-att-alt="patient_image"
+                                <img t-att-src="kanban_image('hospital.patient', 'image', record.id.raw_value)"
+                                     t-att-title="image" t-att-alt="image"
                                      class="rounded oe_kanban_avatar o_image_24_cover"
                                      style="width:70px!important;height:70px!important"/>
                             </div>
                             <div class="row mb4">
                                 <strong class="col-6">
-                                    <field name="patient_name"/>
+                                    <field name="name"/>
                                 </strong>
                                 <strong class="col-6 text-right">
                                     <i class="fa fa-calendar" aria-label="Date" role="img" title="Date"/>
-                                    <field name="patient_age"/>
+                                    <field name="age"/>
                                 </strong>
                                 <div class="col-10">
-                                    <field name="patient_contact"/>
+                                    <field name="contact"/>
                                 </div>
                                 <div class="col-6">
-                                    <field name="patient_gender"/>
+                                    <field name="gender"/>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
         <field name="name">Hospital Patient</field>
         <field name="res_model">hospital.patient</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="context">{'default_patient_contact':'1234567890'}</field>
+        <field name="context">{'default_contact':'1234567890'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create First Patient Details!

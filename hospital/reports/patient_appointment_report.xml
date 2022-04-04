@@ -21,7 +21,7 @@
                                     <b>Patient Name:</b>
                                 </td>
                                 <td>
-                                    <t t-esc="doc.patient_id.patient_name"/>
+                                    <t t-esc="doc.patient_id.name"/>
                                 </td>
                             </tr>
                             <br/>
@@ -30,7 +30,7 @@
                                     <b>Patient Gender:</b>
                                 </td>
                                 <td>
-                                    <t t-esc="doc.patient_id.patient_gender"/>
+                                    <t t-esc="doc.patient_id.gender"/>
                                 </td>
                             </tr>
                             <br/>
@@ -39,7 +39,7 @@
                                     <b>Doctor Name:</b>
                                 </td>
                                 <td>
-                                    <t t-esc="doc.doctor_id.doctor_name"/>
+                                    <t t-esc="doc.doctor_id.name"/>
                                 </td>
                             </tr>
                             <br/>
@@ -48,7 +48,7 @@
                                     <b>Doctor Specialisation:</b>
                                 </td>
                                 <td>
-                                    <t t-esc="doc.doctor_specialization"/>
+                                    <t t-esc="doc.specialization"/>
                                 </td>
                             </tr>
                             <br/>
@@ -93,7 +93,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">hospital.patient_appointment_card</field>
         <field name="report_file">hospital.patient_appointment_card</field>
-        <field name="print_report_name">'%s - %s' % (object.patient_id.patient_name,object.name)</field>
+        <field name="print_report_name">'%s - %s' % (object.patient_id.name,object.name)</field>
 <!--        <field name="binding_model_id" ref="model_purchase_order"/>-->
 <!--        <field name="binding_type">report</field>-->
     </record>
