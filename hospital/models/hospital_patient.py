@@ -8,7 +8,7 @@ class HospitalPatient(models.Model):
     _description = "hospital.patient"
     _order = 'patient_name'
 
-    patient_name = fields.Char('Patient Name', required=True, default='Odoo')
+    patient_name = fields.Char('Patient Name', required=True, default=lambda self: self.env.user.name)
     patient_age = fields.Integer('Patient Age')
     patient_contact = fields.Char('Patient Contact')
     patient_gender = fields.Selection([('male', 'Male'), ('female', 'Female')])
