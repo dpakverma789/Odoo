@@ -41,8 +41,12 @@
                         <group>
                             <field name="specialization"/>
                         </group>
-                        <field name="patient_appointment_ids"/>
                     </group>
+                    <notebook>
+                        <page string="Appointment List" groups="hospital.group_hospital_doctor">
+                            <field name="patient_appointment_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
