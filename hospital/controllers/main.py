@@ -11,7 +11,13 @@ class PatientForm(http.Controller):
     @http.route('/create_patient', type='http', website=True, auth='public')
     def create_patient_record(self, **kwargs):
         if kwargs:
-            request.env['hospital.patient'].sudo().create(kwargs)
+            try:
+                kwargs.update({'gender': kwargs['gender'].lower()})
+                request.env['hospital.patient'].sudo().create(kwargs)
+            except:
+                kwargs.pop('gender')
+                request.env['hospital.patient'].sudo().create(kwargs)
+
         return request.render("hospital.contactus_thanks")
 
 
