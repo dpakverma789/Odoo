@@ -23,3 +23,9 @@ class HospitalDoctor(models.Model):
                 self.total_appointment = len(appointment_count.ids)
                 return
         self.total_appointment = 0
+
+    def copy(self, default=None):
+        default = dict(default or {})
+        default.update(name=_("%s (copy)") % (self.name or ''))
+        return super(HospitalDoctor, self).copy(default)
+

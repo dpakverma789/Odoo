@@ -22,6 +22,7 @@ class HospitalAppointment(models.Model):
                                           ('rejected', "Rejected")], string="Appointment Status", default='draft')
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
     patient_description = fields.Text('Description')
+    patient_medicine = fields.Text('Medicine')
 
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),
@@ -94,4 +95,9 @@ class HospitalAppointment(models.Model):
                     rec.image = rec.patient_id.image
             del records_ids
         return
+
+    def copy(self, default=None):
+        default = dict(default or {})
+        default.update(name=_("%s (copy)") % (self.name or ''))
+        return super(HospitalAppointment, self).copy(default)
 
