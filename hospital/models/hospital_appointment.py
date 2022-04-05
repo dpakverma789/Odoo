@@ -12,16 +12,16 @@ class HospitalAppointment(models.Model):
     _order = 'name desc'
 
     name = fields.Char('Appointment', required=True, copy=False, readonly=True, default=lambda self: _('New'))
-    patient_id = fields.Many2one('hospital.patient', 'Patient Name', required=True)
     gender = fields.Char('Gender')
-    doctor_id = fields.Many2one('hospital.doctor', 'Doctor Name', required=True)
+    image = fields.Binary("Image")
     specialization = fields.Char('Specialization', related='doctor_id.specialization')
+    patient_id = fields.Many2one('hospital.patient', 'Patient Name', required=True)
+    doctor_id = fields.Many2one('hospital.doctor', 'Doctor Name', required=True)
     appointment_time = fields.Datetime('Appointment Time', required=True)
     appointment_state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"),
                                           ('rejected', "Rejected")], string="Appointment Status", default='draft')
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
     patient_description = fields.Text('Description')
-    image = fields.Binary("Image")
 
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),

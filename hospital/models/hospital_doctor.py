@@ -20,6 +20,6 @@ class HospitalDoctor(models.Model):
         if self.patient_appointment_ids:
             appointment_count = self.patient_appointment_ids.filtered(lambda rec: rec.appointment_state == 'confirmed')
             if appointment_count:
-                self.total_appointment = appointment_count.ids.__len__()
+                self.total_appointment = len(appointment_count.ids)
                 return
         self.total_appointment = 0
