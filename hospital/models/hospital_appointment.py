@@ -64,10 +64,11 @@ class HospitalAppointment(models.Model):
 
     # printing report and send email
     def print_patient_appointment_card(self):
-        email_template_id = self.env.ref('hospital.patient_appointment_email_template').id
-        if email_template_id and self.send_email:
-            self.env['mail.template'].browse(email_template_id).send_mail(self.id, force_send=True)
-        return self.env.ref('hospital.patient_appointment_report').report_action(self)
+        for rec in self:
+            email_template_id = self.env.ref('hospital.patient_appointment_email_template').id
+            if email_template_id and rec.send_email:
+                rec.env['mail.template'].browse(email_template_id).send_mail(rec.id, force_send=True)
+            return self.env.ref('hospital.patient_appointment_report').report_action(rec)
 
     # onchange function which depends on patient_id to change patient gender
     @api.onchange('patient_id')
