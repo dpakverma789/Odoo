@@ -23,6 +23,7 @@ class HospitalAppointment(models.Model):
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
     patient_description = fields.Text('Description')
     patient_medicine = fields.Text('Medicine')
+    send_email = fields.Boolean(string='Send Email')
 
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),
@@ -61,15 +62,12 @@ class HospitalAppointment(models.Model):
         res = super(HospitalAppointment, self).create(vals)
         return res
 
-    # printing report
+    # printing report and send email
     def print_patient_appointment_card(self):
-        return self.env.ref('hospital.patient_appointment_report').report_action(self)
-
-    # send email
-    def send_appointment_email(self):
         email_template_id = self.env.ref('hospital.patient_appointment_email_template').id
-        if email_template_id:
+        if email_template_id and self.send_email:
             self.env['mail.template'].browse(email_template_id).send_mail(self.id, force_send=True)
+        return self.env.ref('hospital.patient_appointment_report').report_action(self)
 
     # onchange function which depends on patient_id to change patient gender
     @api.onchange('patient_id')

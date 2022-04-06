@@ -48,10 +48,6 @@
                             string="Print Appointment Card"
                             type="object" class="oe_highlight"
                             attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
-                    <button name="send_appointment_email"
-                            string="Send Appointment Email"
-                            type="object" class="oe_highlight"
-                            attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
                     <field name="appointment_state" widget="statusbar" statusbar_visible="draft,confirmed"/>
                 </header>
                 <sheet>
@@ -73,6 +69,7 @@
                         <group>
                             <field name="patient_description"/>
                             <field name="patient_medicine"/>
+                            <field name="send_email"/>
                         </group>
                     </group>
                 </sheet>
