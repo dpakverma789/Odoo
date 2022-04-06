@@ -69,7 +69,8 @@
                         <group>
                             <field name="patient_description"/>
                             <field name="patient_medicine"/>
-                            <field name="send_email"/>
+                            <field name="send_email" widget="boolean_toggle"
+                            attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
                         </group>
                     </group>
                 </sheet>
