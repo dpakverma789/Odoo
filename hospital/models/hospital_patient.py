@@ -13,6 +13,7 @@ class HospitalPatient(models.Model):
     image = fields.Binary("Image", copy=False)
     age = fields.Integer('Patient Age', default=1)
     contact = fields.Char('Patient Contact', copy=False)
+    email = fields.Char('Patient Email', copy=False)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')])
     appointment_ids = fields.One2many('hospital.appointment', inverse_name='patient_id',
                                       string='Appointments', readonly=True)

@@ -13,6 +13,7 @@
         'security/ir.model.access.csv',
         'wizard/appointment_request_wizard.xml',
         'reports/patient_appointment_report.xml',
+        'reports/patient_appointment_email_template.xml',
         'data/appointment_sequence.xml',
         'data/cron.xml',
         'views/patient_form_template.xml',
