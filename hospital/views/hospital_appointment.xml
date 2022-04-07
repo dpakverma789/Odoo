@@ -73,7 +73,7 @@
                             <field name="patient_description"/>
                             <field name="patient_medicine"/>
                             <field name="send_email" widget="boolean_toggle"
-                            attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
+                                   attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
                         </group>
                     </group>
                 </sheet>
@@ -144,6 +144,10 @@
                     <filter name="doctor_id" string="Doctor Name" context="{'group_by':'doctor_id'}"/>
                     <filter name="appointment_state" string="State" context="{'group_by':'appointment_state'}"/>
                 </group>
+                <searchpanel>
+                    <field name="appointment_state" string="State" enable_counters="1"/>
+                    <field name="doctor_id" string="Doctor" enable_counters="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>

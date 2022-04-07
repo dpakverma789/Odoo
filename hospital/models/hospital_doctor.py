@@ -12,6 +12,7 @@ class HospitalDoctor(models.Model):
     image = fields.Binary("Image")
     specialization = fields.Char('Specialization', required=True)
     total_appointment = fields.Integer('Total Appointment', compute='_compute_total_appointment')
+    active = fields.Boolean('Active', default=True)
     patient_appointment_ids = fields.One2many('hospital.appointment', inverse_name='doctor_id',
                                               string='Appointments', readonly=True)
 
