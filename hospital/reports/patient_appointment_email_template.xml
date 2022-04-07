@@ -27,6 +27,6 @@
             </div>
         </field>
         <field name="report_template" ref="hospital.patient_appointment_report"/>
-        <field name="report_name">Patient Appointment of ${object.name}</field>
+        <field name="report_name">${object.patient_id.name} - ${object.name}</field>
     </record>
 </odoo>
