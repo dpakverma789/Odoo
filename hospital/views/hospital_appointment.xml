@@ -62,12 +62,13 @@
                     <field name="image" widget='image' class="oe_avatar"/>
                     <group>
                         <group>
-                            <field name="patient_id"/>
+                            <field name="patient_id" options="{'no_create_edit': True,'no_create': True}"/>
                             <field name="gender" readonly="1" force_save="1"/>
-                            <field name="doctor_id"/>
+                            <field name="doctor_id" options="{'no_create_edit': True,'no_create': True}"/>
                             <field name="specialization"/>
                             <field name="appointment_time"/>
-                            <field name="rejection_id" attrs="{'invisible':[('rejection_id','=',False)]}"/>
+                            <field name="rejection_id" options="{'no_create_edit': True,'no_create': True}"
+                                   attrs="{'invisible':[('rejection_id','=',False)]}"/>
                         </group>
                         <group>
                             <field name="patient_description"/>
