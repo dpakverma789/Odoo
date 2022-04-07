@@ -10,11 +10,11 @@
                   decoration-danger="appointment_state=='rejected'"
                   sample="1"
                   multi_edit="1">
-                <header>
-                    <button name="print_patient_appointment_card"
-                            string="Print Appointment Card"
-                            type="object" class="oe_highlight"/>
-                </header>
+<!--                <header>-->
+<!--                    <button name="print_patient_appointment_card"-->
+<!--                            string="Print Appointment Card"-->
+<!--                            type="object" class="oe_highlight"/>-->
+<!--                </header>-->
                 <field name="name" readonly="1"/>
                 <field name="patient_id"/>
                 <field name="doctor_id"/>
