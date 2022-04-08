@@ -17,6 +17,8 @@ class HospitalPatient(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')])
     appointment_ids = fields.One2many('hospital.appointment', inverse_name='patient_id',
                                       string='Appointments', readonly=True)
+    patient_class_status_ids = fields.Many2many('patient.class.status', 'appointment_patient_status_rel',
+                                                'appointment_id', 'patient_status_id', string='Patient Status')
 
     def copy(self, default=None):
         default = dict(default or {})

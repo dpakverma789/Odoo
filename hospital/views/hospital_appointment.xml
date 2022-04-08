@@ -45,7 +45,7 @@
                             type="object" groups="hospital.group_hospital_doctor"
                             attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>
                     <button name="print_patient_appointment_card"
-                            string="Print Appointment Card"
+                            string="Print &#38; Send Email Appointment Card"
                             type="object" class="oe_highlight"
                             attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
                     <field name="appointment_state" widget="statusbar" statusbar_visible="draft,confirmed"/>
@@ -62,20 +62,25 @@
                     <field name="image" widget='image' class="oe_avatar"/>
                     <group>
                         <group>
-                            <field name="patient_id" options="{'no_create_edit': True,'no_create': True}"/>
-                            <field name="patient_class_status_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="patient_id" options="{'no_create_edit': True,'no_create': True}"
+                            attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                            <field name="patient_class_status_ids" widget="many2many_tags"
+                                   options="{'color_field': 'color'}"/>
                             <field name="gender" readonly="1" force_save="1"/>
-                            <field name="doctor_id" options="{'no_create_edit': True,'no_create': True}"/>
-                            <field name="specialization"/>
-                            <field name="appointment_time"/>
+                            <field name="doctor_id" options="{'no_create_edit': True,'no_create': True}"
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                            <field name="specialization" readonly="1"/>
+                            <field name="appointment_time"
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
                             <field name="rejection_id" options="{'no_create_edit': True,'no_create': True}"
-                                   attrs="{'invisible':[('rejection_id','=',False)]}"/>
+                             attrs="{'invisible':[('rejection_id','=',False)], 'readonly': [('appointment_state','!=','draft')]}"/>
                         </group>
                         <group>
-                            <field name="patient_description"/>
-                            <field name="patient_medicine"/>
-                            <field name="send_email" widget="boolean_toggle"
-                                   attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
+                            <field name="patient_description"
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                            <field name="patient_medicine"
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                            <field name="send_email" widget="boolean_toggle"/>
                         </group>
                     </group>
                 </sheet>

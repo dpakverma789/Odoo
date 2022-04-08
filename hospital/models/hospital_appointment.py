@@ -16,6 +16,7 @@ class HospitalAppointment(models.Model):
     image = fields.Binary("Image")
     specialization = fields.Char('Specialization', related='doctor_id.specialization')
     patient_id = fields.Many2one('hospital.patient', 'Patient Name', required=True)
+    patient_class_status_ids = fields.Many2many(related='patient_id.patient_class_status_ids')
     doctor_id = fields.Many2one('hospital.doctor', 'Doctor Name', required=True)
     appointment_time = fields.Datetime('Appointment Time', required=True)
     appointment_state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"),
@@ -24,8 +25,6 @@ class HospitalAppointment(models.Model):
     patient_description = fields.Text('Description')
     patient_medicine = fields.Text('Medicine')
     send_email = fields.Boolean(string='Send Email')
-    patient_class_status_ids = fields.Many2many('patient.class.status', 'appointment_patient_status_rel',
-                                                'appointment_id', 'patient_status_id', string='Patient Status')
 
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),
