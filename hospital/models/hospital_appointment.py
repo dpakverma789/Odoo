@@ -24,6 +24,8 @@ class HospitalAppointment(models.Model):
     patient_description = fields.Text('Description')
     patient_medicine = fields.Text('Medicine')
     send_email = fields.Boolean(string='Send Email')
+    patient_class_status_ids = fields.Many2many('patient.class.status', 'appointment_patient_status_rel',
+                                                'appointment_id', 'patient_status_id', string='Patient Status')
 
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),

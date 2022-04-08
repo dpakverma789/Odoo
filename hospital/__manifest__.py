@@ -21,6 +21,7 @@
         'views/hospital_appointment.xml',
         'views/hospital_doctor.xml',
         'views/rejection_reason.xml',
+        'views/patient_class_status.xml',
     ],
     'demo': [],
     'qweb': [],
