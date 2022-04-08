@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form string="hospital_appointment_request">
                 <group>
-                    <field name="rejection_reason"/>
+                    <field name="rejection_reason" options="{'no_create_edit': True,'no_create': True}"/>
                 </group>
                 <footer>
                     <button name="reject_appointment" confirm="Are you sure to Reject?"
