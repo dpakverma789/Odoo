@@ -15,7 +15,8 @@ class AppointmentRequestWizard(models.TransientModel):
             rejection_id.appointment_state = 'rejected'
         else:
             discard_appointments = self.env['hospital.appointment'].search([('appointment_state', '=', 'draft')])
-            rejection_reason = self.env['appointment.rejection.reason'].search([('rejection_reason', '=', 'Discard by Bot')])
+            rejection_reason = self.env['appointment.rejection.reason']\
+                .search([('rejection_reason', '=', 'Discard by Bot')])
             for rec in discard_appointments:
                 if rec.create_date + timedelta(days=2) < datetime.now():
                     rec.rejection_id = rejection_reason.id
