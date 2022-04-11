@@ -11,19 +11,13 @@ class AppointmentRequestWizard(models.TransientModel):
     def reject_appointment(self):
         rejection_id = self.env['hospital.appointment'].browse(self._context.get("active_id"))
         if rejection_id:
-            rejection_id.write({
-                'rejection_id': self.rejection_reason,
-                'appointment_state': 'rejected'
-            })
+            rejection_id.write({'rejection_id': self.rejection_reason, 'appointment_state': 'rejected'})
         else:
             discard_appointments = self.env['hospital.appointment'].search([('appointment_state', '=', 'draft')])
             rejection_reason = self.env['appointment.rejection.reason']\
                 .search([('rejection_reason', '=', 'Discard by Bot')])
             for rec in discard_appointments:
                 if rec.create_date + timedelta(days=2) < datetime.now():
-                    rec.write({
-                        'rejection_id': rejection_reason.id,
-                        'appointment_state': 'rejected'
-                    })
+                    rec.write({'rejection_id': rejection_reason.id, 'appointment_state': 'rejected'})
 
 
