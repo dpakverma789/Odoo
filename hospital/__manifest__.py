@@ -16,6 +16,7 @@
         'reports/patient_appointment_email_template.xml',
         'data/appointment_sequence.xml',
         'data/cron.xml',
+        'demo/base_data.xml',
         'views/patient_form_template.xml',
         'views/hospital_patient.xml',
         'views/hospital_appointment.xml',

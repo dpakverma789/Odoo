@@ -1,3 +1,4 @@
+import datetime
 
 from odoo import api, fields, models, tools, _
 from datetime import timedelta
@@ -47,6 +48,11 @@ class HospitalAppointment(models.Model):
                 'img_url': '/web/static/src/img/smile.svg',
                 'type': 'rainbow_man',
             }}
+
+    @api.constrains('appointment_time')
+    def _check_appointment_date(self):
+        if self.appointment_time < datetime.datetime.now():
+            raise ValidationError(_('Make an Appointment for Future date!'))
 
     # overriding delete function to check condition before deleting records
     def unlink(self):

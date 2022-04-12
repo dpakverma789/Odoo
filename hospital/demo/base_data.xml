@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="rejected_by_bot" model="appointment.rejection.reason">
+            <field name="rejection_reason">Discard by Bot</field>
+        </record>
+    </data>
+</odoo>
