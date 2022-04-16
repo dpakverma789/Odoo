@@ -34,7 +34,6 @@
     ],
     'demo': [
         # demo data files
-        'demo/base_data.xml',
         'demo/demo_data.xml'
     ],
     'qweb': [],

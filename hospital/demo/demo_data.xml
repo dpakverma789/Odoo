@@ -48,5 +48,10 @@
             <field name="name">Sonali</field>
             <field name="specialization">Dentist</field>
         </record>
+
+        <!-- default rejection reason  -->
+        <record id="rejected_by_bot" model="appointment.rejection.reason">
+            <field name="rejection_reason">Discard by Bot</field>
+        </record>
     </data>
 </odoo>
