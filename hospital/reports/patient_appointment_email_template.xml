@@ -13,7 +13,7 @@
             <div class="container-fluid">
                 <b>Hi ${object.patient_id.name},</b>
                 <br/>
-                Your Appointment has been <b>${object.appointment_state}</b>.
+                Your Appointment has been <b>${object.appointment_state}</b> with <b>Dr. ${object.doctor_id.name}</b>.
                 <br/>
                 Please find the appointment receipt in the attachment, if you have any query please feel free to
                 contact us.
