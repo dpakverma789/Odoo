@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- demo patients  -->
+        <record id="patient_1" model="hospital.patient">
+            <field name="name">Deepak</field>
+            <field name="age">25</field>
+            <field name="contact">1234567890</field>
+            <field name="email">deepak@gmail.com</field>
+            <field name="gender">male</field>
+        </record>
+        <record id="patient_2" model="hospital.patient">
+            <field name="name">Odoo</field>
+            <field name="age">10</field>
+            <field name="contact">2345678910</field>
+            <field name="email">odoo@gmail.com</field>
+            <field name="gender">male</field>
+        </record>
+        <record id="patient_3" model="hospital.patient">
+            <field name="name">Neha</field>
+            <field name="age">25</field>
+            <field name="contact">1023654789</field>
+            <field name="email">neha@gmail.com</field>
+            <field name="gender">female</field>
+        </record>
+        <record id="patient_4" model="hospital.patient">
+            <field name="name">Arpita</field>
+            <field name="age">28</field>
+            <field name="contact">1095654789</field>
+            <field name="email">arpita@gmail.com</field>
+            <field name="gender">female</field>
+        </record>
+
+        <!-- demo doctors  -->
+        <record id="doctor_1" model="hospital.doctor">
+            <field name="name">Prachi</field>
+            <field name="specialization">Heart Specialist</field>
+        </record>
+        <record id="doctor_2" model="hospital.doctor">
+            <field name="name">Rajashree</field>
+            <field name="specialization">Neuro Surgeon</field>
+        </record>
+        <record id="doctor_3" model="hospital.doctor">
+            <field name="name">Priyanka</field>
+            <field name="specialization">General Physician</field>
+        </record>
+        <record id="doctor_4" model="hospital.doctor">
+            <field name="name">Sonali</field>
+            <field name="specialization">Dentist</field>
+        </record>
+    </data>
+</odoo>
