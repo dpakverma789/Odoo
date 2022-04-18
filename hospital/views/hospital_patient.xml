@@ -120,6 +120,9 @@
         </field>
     </record>
 
+    <!-- root menu  -->
     <menuitem id="hospital_root_menu" name="Hospital"/>
+
+    <!-- Patients menu  -->
     <menuitem id="hospital_patient_menu" name="Patients" parent="hospital_root_menu" action="hospital_patient_action"/>
 </odoo>

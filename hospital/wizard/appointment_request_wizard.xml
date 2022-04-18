@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!-- form view  -->
     <record id="hospital_appointment_request_wizard" model="ir.ui.view">
         <field name="name">hospital.appointment.request.wizard</field>
         <field name="model">hospital.appointment.request.wizard</field>
@@ -19,7 +20,7 @@
         </field>
     </record>
 
-
+    <!-- action  -->
     <record id="action_hospital_appointment_request_wizard" model="ir.actions.act_window">
         <field name="name">Rejection Reason</field>
         <field name="type">ir.actions.act_window</field>

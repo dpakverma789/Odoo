@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <!-- patient form  -->
     <template id="patient_form_template" name="Patient Form">
         <t t-call="website.layout">
             <div id="wrap">
@@ -79,6 +80,7 @@
         </t>
     </template>
 
+    <!-- Thanks page  -->
     <record id="contactus_thanks" model="website.page">
         <field name="name">Thanks (Contact us)</field>
         <field name="type">qweb</field>
@@ -125,6 +127,7 @@
         </field>
     </record>
 
+    <!-- website menu  -->
     <record id="patient_form_menu" model="website.menu">
         <field name="name">Register Patient</field>
         <field name="url">/patient</field>

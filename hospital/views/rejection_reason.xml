@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!-- form view  -->
     <record id="rejection_reason_form" model="ir.ui.view">
         <field name="name">appointment.rejection.reason.form</field>
         <field name="model">appointment.rejection.reason</field>
@@ -15,6 +16,7 @@
         </field>
     </record>
 
+    <!-- tree view  -->
     <record id="rejection_reason_tree" model="ir.ui.view">
         <field name="name">appointment.rejection.reason.tree</field>
         <field name="model">appointment.rejection.reason</field>
@@ -25,6 +27,7 @@
         </field>
     </record>
 
+    <!-- action  -->
     <record id="rejection_reason_action" model="ir.actions.act_window">
         <field name="name">Rejection Reason</field>
         <field name="res_model">appointment.rejection.reason</field>
@@ -36,7 +39,12 @@
         </field>
     </record>
 
-    <menuitem id="hospital_root_menu" name="Hospital"/>
-    <menuitem id="hospital_rejection_reason_menu" name="Rejection Reasons" parent="hospital_root_menu"
-              action="rejection_reason_action"/>
+    <!-- default rejection reason  -->
+    <record id="rejected_by_bot" model="appointment.rejection.reason">
+        <field name="rejection_reason">Discard by Bot</field>
+    </record>
+
+    <!-- Rejection Reason menu  -->
+    <menuitem id="hospital_rejection_reason_menu" name="Rejection Reasons"
+              parent="hospital_root_menu" action="rejection_reason_action"/>
 </odoo>

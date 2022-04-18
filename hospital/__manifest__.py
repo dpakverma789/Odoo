@@ -31,12 +31,14 @@
         'views/hospital_doctor.xml',
         'views/rejection_reason.xml',
         'views/patient_class_status.xml',
+        'views/assets.xml',
+        'views/dashboard_action.xml',
     ],
     'demo': [
         # demo data files
         'demo/demo_data.xml'
     ],
-    'qweb': [],
+    'qweb': ['static/src/xml/dashboard.xml'],
     'sequence': '1',
     'installable': True,
     'application': True,

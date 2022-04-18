@@ -86,6 +86,10 @@ class HospitalAppointment(models.Model):
             if self.patient_id.image:
                 self.image = self.patient_id.image
 
+    def total_patient(self):
+        total_appointment = self.search_count([('appointment_state', '=', 'confirmed')])
+        return total_appointment
+
     # wizard call using python function
     def rejection_reason_wizard(self):
         wizard_view = {
