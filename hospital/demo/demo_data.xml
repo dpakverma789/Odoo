@@ -57,6 +57,7 @@
             <field name="image" type="base64" file="hospital/static/images/doctor-4.jpg"/>
         </record>
 
+        <!-- demo rejection reason  -->
         <record id="already_have_appointment" model="appointment.rejection.reason">
             <field name="rejection_reason">Already have appointment</field>
         </record>

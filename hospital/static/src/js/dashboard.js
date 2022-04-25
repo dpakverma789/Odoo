@@ -18,6 +18,6 @@ var hospital_dashboard = AbstractAction.extend({
         }
     });
 
-core.action_registry.add('hospital_dashboard_tag', hospital_dashboard);
+core.action_registry.add('hospital_dashboard', hospital_dashboard);
 return hospital_dashboard;
 });

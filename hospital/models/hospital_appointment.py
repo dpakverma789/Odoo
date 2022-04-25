@@ -49,6 +49,7 @@ class HospitalAppointment(models.Model):
                 'type': 'rainbow_man',
             }}
 
+    # avoid past date appointment booking
     @api.constrains('appointment_time')
     def _check_appointment_date(self):
         if self.appointment_time < datetime.datetime.now():
@@ -118,3 +119,10 @@ class HospitalAppointment(models.Model):
         default.update(name=_("%s (copy)") % (self.name or ''))
         return super(HospitalAppointment, self).copy(default)
 
+    @api.model
+    def _name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        if name:
+            records = self.search(['|', ('contact', operator, name), ('name', operator, name)])
+            return records.name_get()
+        return self.search([('name', operator, name)]+args, limit=limit).name_get()
