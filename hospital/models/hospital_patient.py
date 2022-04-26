@@ -30,7 +30,7 @@ class HospitalPatient(models.Model):
         patient_contact = self.search([('contact', '=', self.contact), ('id', '!=', self.id),
                                        ('contact', '!=', 'False')])
         if patient_contact:
-            raise ValidationError(_('You cannot create recursive patient with same contact.'))
+            raise ValidationError(_('You cannot create patient with same contact.'))
 
     # @api.depends('name', 'age')
     # def name_get(self):

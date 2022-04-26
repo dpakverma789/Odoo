@@ -9,7 +9,5 @@ class PatientClassStatus(models.Model):
     patient_class_status = fields.Char('Patient Class Status')
     color = fields.Integer('Color Index')
 
-    _sql_constraints = [
-        ('positive_color', 'CHECK(color >= 0)', 'The color code must be positive !')
-    ]
+    _sql_constraints = [('positive_color', 'CHECK(color >= 0)', 'The color code must be positive !')]
 

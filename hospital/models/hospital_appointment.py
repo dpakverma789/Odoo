@@ -116,7 +116,7 @@ class HospitalAppointment(models.Model):
 
     def copy(self, default=None):
         default = dict(default or {})
-        default.update(name=_("%s (copy)") % (self.name or ''))
+        default.update(name=_("%s (copy)") % self.name or '')
         return super(HospitalAppointment, self).copy(default)
 
     @api.model

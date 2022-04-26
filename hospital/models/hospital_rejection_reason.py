@@ -11,7 +11,7 @@ class AppointmentRejectionReason(models.Model):
 
     def copy(self, default=None):
         default = dict(default or {})
-        default.update(rejection_reason=_("%s (copy)") % (self.rejection_reason or ''))
+        default.update(rejection_reason=_("%s (copy)") % self.rejection_reason or '')
         return super(AppointmentRejectionReason, self).copy(default)
 
 

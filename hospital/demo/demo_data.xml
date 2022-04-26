@@ -59,7 +59,10 @@
 
         <!-- demo rejection reason  -->
         <record id="already_have_appointment" model="appointment.rejection.reason">
-            <field name="rejection_reason">Already have appointment</field>
+            <field name="rejection_reason">Doctor already have appointment</field>
+        </record>
+        <record id="doctor_is_on_leave" model="appointment.rejection.reason">
+            <field name="rejection_reason">Doctor is on leave</field>
         </record>
     </data>
 </odoo>
