@@ -8,6 +8,7 @@
             <tree string="hospital_appointment_details"
                   decoration-success="appointment_state=='confirmed'"
                   decoration-danger="appointment_state=='rejected'"
+                  decoration-muted="appointment_state=='Done'"
                   sample="1"
                   multi_edit="1">
                 <header>
@@ -35,13 +36,13 @@
                             confirm="Are you sure to confirm?"
                             groups="hospital.group_hospital_doctor"
                             type="object" class="oe_highlight"
-                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected','Done'))]}"/>
 <!--                    <button name="%(hospital.action_hospital_appointment_request_wizard)d" string="Reject"-->
 <!--                            type="action" groups="hospital.group_hospital_doctor"-->
 <!--                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>-->
                     <button name="rejection_reason_wizard" string="Reject"
                             type="object" groups="hospital.group_hospital_doctor"
-                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected','Done'))]}"/>
                     <button name="print_patient_appointment_card"
                             string="Print &#38; Send Email Appointment Card"
                             type="object" class="oe_highlight"

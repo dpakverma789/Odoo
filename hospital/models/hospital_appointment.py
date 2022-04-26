@@ -1,9 +1,8 @@
 import datetime
 
 from odoo import api, fields, models, tools, _
-from datetime import timedelta
 from odoo.exceptions import ValidationError
-
+from datetime import datetime, timedelta
 
 class HospitalAppointment(models.Model):
     _name = "hospital.appointment"
@@ -20,7 +19,7 @@ class HospitalAppointment(models.Model):
     patient_class_status_ids = fields.Many2many(related='patient_id.patient_class_status_ids')
     doctor_id = fields.Many2one('hospital.doctor', 'Doctor Name', required=True)
     appointment_time = fields.Datetime('Appointment Time', required=True)
-    appointment_state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"),
+    appointment_state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"), ('Done', 'Done'),
                                           ('rejected', "Rejected")], string="Appointment Status", default='draft')
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
     patient_description = fields.Text('Description')
@@ -52,7 +51,7 @@ class HospitalAppointment(models.Model):
     # avoid past date appointment booking
     @api.constrains('appointment_time')
     def _check_appointment_date(self):
-        if self.appointment_time < datetime.datetime.now():
+        if self.appointment_time < datetime.now():
             raise ValidationError(_('Make an Appointment for Future date!'))
 
     # overriding delete function to check condition before deleting records
@@ -87,9 +86,11 @@ class HospitalAppointment(models.Model):
             if self.patient_id.image:
                 self.image = self.patient_id.image
 
-    def total_patient(self):
-        total_appointment = self.search_count([('appointment_state', '=', 'confirmed')])
-        return total_appointment
+    def expire_appointment(self):
+        total_appointment = self.search([('appointment_state', '=', 'confirmed')])
+        for rec in total_appointment:
+            if rec.appointment_time < datetime.now():
+                rec.write({'appointment_state': 'Done'})
 
     # wizard call using python function
     def rejection_reason_wizard(self):
