@@ -8,17 +8,15 @@ var rpc = require('web.rpc');
 var hospital_dashboard = AbstractAction.extend({
     template: 'hospital_dashboard_view',
 
-//    init : function(){
-//            var patient_count = rpc.query({
-//                model: 'hospital.appointment',
-//                method: 'total_patient',
-//                args: [],
-//                kwargs: {}
-//            }).then(function (result) {
-//                $('.patient').innerHTML = result;
-//            });
-//        }
-//    });
+    patient_count : function(){
+            var patient_count = rpc.query({
+                model: 'hospital.appointment',
+                method: 'total_patient'
+            }).then(function (result) {
+                $('.patient').innerHTML = result;
+            });
+        }
+    });
 
 core.action_registry.add('hospital_dashboard', hospital_dashboard);
 return hospital_dashboard;
