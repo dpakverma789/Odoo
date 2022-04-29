@@ -8,6 +8,8 @@
             <tree string="expense_transaction_tree_view" sample="1">
                 <field name="name"/>
                 <field name="category"/>
+                <field name="amount"/>
+                <field name="date"/>
             </tree>
         </field>
     </record>
@@ -19,6 +21,35 @@
         <field name="arch" type="xml">
             <form string="expense_transaction_form_view">
                 <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" disabled="True" icon="fa-list">Needs
+                            <div class="o_stat_info">
+                                <span class="o_stat_text" style="font-size:12px">
+                                    <strong>
+                                        <field name="total_needs" readony="1"/>
+                                    </strong>
+                                </span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" disabled="True" icon="fa-list">Wants
+                            <div class="o_stat_info">
+                                <span class="o_stat_text" style="font-size:12px">
+                                    <strong>
+                                        <field name="total_wants" readony="1"/>
+                                    </strong>
+                                </span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" disabled="True" icon="fa-list">Total
+                            <div class="o_stat_info">
+                                <span class="o_stat_text" style="font-size:12px">
+                                    <strong>
+                                        <field name="total_expense" readony="1"/>
+                                    </strong>
+                                </span>
+                            </div>
+                        </button>
+                    </div>
                     <group>
                         <group>
                             <field name="name"/>
@@ -31,6 +62,25 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!-- Search View  -->
+    <record id="expense_transaction_search" model="ir.ui.view">
+        <field name="name">expense.transaction.search</field>
+        <field name="model">expense.transaction</field>
+        <field name="arch" type="xml">
+            <search string="expense_transaction_search">
+                <field name="name"/>
+                <field name="category"/>
+                <field name="date"/>
+                <field name="expense_type"/>
+                <group expand="0" string="Group By">
+                    <filter name="category" string="Category" context="{'group_by':'category'}"/>
+                    <filter name="expense_type" string="Expense Type" context="{'group_by':'expense_type'}"/>
+                    <filter name="date" string="Date" context="{'group_by':'date'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

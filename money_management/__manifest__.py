@@ -28,6 +28,7 @@
     ],
     'demo': [
         # demo data files
+        'demo/demo_data.xml'
 
     ],
     'qweb': [],

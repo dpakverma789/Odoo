@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- expense.category  -->
+        <record id="shopping" model="expense.category">
+            <field name="name">Shopping</field>
+        </record>
+        <record id="entertainment" model="expense.category">
+            <field name="name">Entertainment</field>
+        </record>
+        <record id="food" model="expense.category">
+            <field name="name">Food</field>
+        </record>
+        <record id="credit_card" model="expense.category">
+            <field name="name">Credit Card</field>
+        </record>
+        <record id="recharge" model="expense.category">
+            <field name="name">Recharge</field>
+        </record>
+        <record id="health_fitness" model="expense.category">
+            <field name="name">Health &#38; Fitness</field>
+        </record>
+        <record id="study_course" model="expense.category">
+            <field name="name">Study &#38; Course</field>
+        </record>
+        <record id="transport" model="expense.category">
+            <field name="name">Transport</field>
+        </record>
+    </data>
+</odoo>

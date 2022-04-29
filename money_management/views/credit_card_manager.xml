@@ -25,8 +25,8 @@
             <form string="credit_card_manager_form_view">
                 <header>
                     <field name="payment_state" widget="statusbar"/>
-                    <button name="confirm_payment" string="Mark as Done"
-                            confirm="Are you sure to confirm?"
+                    <button name="confirm_payment" string="Mark as Paid"
+                            confirm="Are you sure?"
                             type="object" class="oe_highlight"
                             attrs="{'invisible':[('payment_state','in',('done'))]}"/>
                 </header>
@@ -36,15 +36,34 @@
                             attrs="{'invisible':[('payment_state','in',('pending'))]}"/>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="due_date"/>
-                            <field name="paid_date" attrs="{'invisible':[('payment_state','in',('pending'))]}"/>
-                            <field name="amount" widget="monetary"/>
-                            <field name="currency_id"/>
+                            <field name="name" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
+                            <field name="due_date" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
+                            <field name="paid_date" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
+                            <field name="amount" widget="monetary"
+                                   attrs="{'readonly':[('payment_state','in',('done'))]}"/>
+                            <field name="currency_id" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
                         </group>
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!-- Search View  -->
+    <record id="credit_card_manager_search" model="ir.ui.view">
+        <field name="name">credit.card.manager.search</field>
+        <field name="model">credit.card.manager</field>
+        <field name="arch" type="xml">
+            <search string="credit_card_manager_search">
+                <field name="name"/>
+                <field name="amount"/>
+                <field name="due_date"/>
+                <field name="paid_date"/>
+                <field name="payment_state"/>
+                <group expand="0" string="Group By">
+                    <filter name="payment_state" string="Payment State" context="{'group_by':'payment_state'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
