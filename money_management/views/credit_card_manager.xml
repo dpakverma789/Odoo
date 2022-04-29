@@ -11,6 +11,7 @@
                 <field name="name"/>
                 <field name="amount"/>
                 <field name="due_date"/>
+                <field name="paid_date"/>
                 <field name="payment_state"/>
             </tree>
         </field>
@@ -37,6 +38,7 @@
                         <group>
                             <field name="name"/>
                             <field name="due_date"/>
+                            <field name="paid_date" attrs="{'invisible':[('payment_state','in',('pending'))]}"/>
                             <field name="amount" widget="monetary"/>
                             <field name="currency_id"/>
                         </group>

@@ -25,7 +25,11 @@
                     </group>
                     <notebook>
                         <page string="Expense List" name="expense_notebook">
-                            <field name="expense_ids"/>
+                            <field name="expense_ids">
+                                <tree string="one2many_tree_view">
+                                     <field name="name"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
