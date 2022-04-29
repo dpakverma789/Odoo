@@ -14,15 +14,22 @@ class HospitalDoctor(models.Model):
     total_appointment = fields.Integer('Total Appointment', compute='_compute_total_appointment')
     active = fields.Boolean('Active', default=True)
     patient_appointment_ids = fields.One2many('hospital.appointment', inverse_name='doctor_id',
-                                              string='Appointments', readonly=True)
+                                              string='Appointments', readonly=True, store=True)
 
     @api.depends('patient_appointment_ids')
     def _compute_total_appointment(self):
-        if self.patient_appointment_ids:
-            appointment_count = self.patient_appointment_ids.filtered(lambda rec: rec.appointment_state == 'confirmed')
+        if len(self) == 1 and self.patient_appointment_ids:
+            appointment_count = self.patient_appointment_ids.filtered(lambda i: i.appointment_state == 'confirmed')
             if appointment_count:
                 self.total_appointment = len(appointment_count.ids)
                 return
+        # else:
+        #     doctor_appointment_count = {}
+        #     for rec in self:
+        #         confirm_appointment = rec.patient_appointment_ids
+        #         .filtered(lambda x: x.appointment_state == 'confirmed')
+        #         doctor_appointment_count.update({rec.name: len(confirm_appointment)})
+        #     return doctor_appointment_count
         self.total_appointment = 0
 
     def copy(self, default=None):

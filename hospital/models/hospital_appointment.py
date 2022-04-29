@@ -4,6 +4,7 @@ from odoo import api, fields, models, tools, _
 from odoo.exceptions import ValidationError
 from datetime import datetime, timedelta
 
+
 class HospitalAppointment(models.Model):
     _name = "hospital.appointment"
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -26,6 +27,7 @@ class HospitalAppointment(models.Model):
     patient_medicine = fields.Text('Medicine')
     send_email = fields.Boolean(string='Send Email')
 
+    # appointment confirm
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),
                                            ('doctor_id', '=', self.doctor_id.id)])
@@ -86,6 +88,7 @@ class HospitalAppointment(models.Model):
             if self.patient_id.image:
                 self.image = self.patient_id.image
 
+    # expires confirm appointment
     def expire_appointment(self):
         total_appointment = self.search([('appointment_state', '=', 'confirmed')])
         for rec in total_appointment:
@@ -115,11 +118,13 @@ class HospitalAppointment(models.Model):
             del records_ids
         return
 
+    # override copy function
     def copy(self, default=None):
         default = dict(default or {})
         default.update(name=_("%s (copy)") % self.name or '')
         return super(HospitalAppointment, self).copy(default)
 
+    # override name search method
     @api.model
     def _name_search(self, name, args=None, operator='ilike', limit=100):
         args = args or []
