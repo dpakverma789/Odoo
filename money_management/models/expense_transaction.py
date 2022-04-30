@@ -17,7 +17,7 @@ class ExpenseTransaction(models.Model):
     total_wants = fields.Integer('Wants', invisible=True, compute='_total_expense')
     expense_type = fields.Selection([('need', 'Need'), ('want', 'Want')], default='want', required=True)
     note = fields.Text('Note', default='Notes are not available')
-    date = fields.Datetime('Transaction Date', default=lambda self: fields.Datetime.now())
+    date = fields.Date('Transaction Date', default=lambda self: fields.Datetime.now())
 
     @api.constrains('amount')
     def expense_amount_check(self):
