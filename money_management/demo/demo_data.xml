@@ -26,5 +26,8 @@
         <record id="transport" model="expense.category">
             <field name="name">Transport</field>
         </record>
+        <record id="general" model="expense.category">
+            <field name="name">General</field>
+        </record>
     </data>
 </odoo>
