@@ -13,12 +13,14 @@
         'security/ir.model.access.csv',
 
         # wizard files
+        'wizards/credit_bill_notification_wizard.xml',
 
 
         # reports files
 
 
         # data files
+        'data/cron.xml',
 
         # views files
         'views/expense_category.xml',
