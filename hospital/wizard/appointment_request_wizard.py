@@ -17,7 +17,9 @@ class AppointmentRequestWizard(models.TransientModel):
             rejection_reason = self.env['appointment.rejection.reason']\
                 .search([('rejection_reason', '=', 'Discard by Bot')])
             for rec in discard_appointments:
-                if rec.create_date + timedelta(days=2) < datetime.now():
-                    rec.write({'rejection_id': rejection_reason.id, 'appointment_state': 'rejected'})
+                discard_days = int(self.env['ir.config_parameter'].sudo().get_param('discard_days'))
+                if discard_days:
+                    if rec.create_date + timedelta(days=discard_days) < datetime.now():
+                        rec.write({'rejection_id': rejection_reason.id, 'appointment_state': 'rejected'})
 
 

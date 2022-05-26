@@ -18,7 +18,3 @@ class PatientForm(http.Controller):
                 kwargs.pop('gender')
                 request.env['hospital.patient'].sudo().create(kwargs)
         return request.render("hospital.contactus_thanks")
-
-
-
-

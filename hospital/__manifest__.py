@@ -33,6 +33,7 @@
         'views/patient_class_status.xml',
         'views/assets.xml',
         'views/dashboard_action.xml',
+        'views/res_config_settings.xml',
     ],
     'demo': [
         # demo data files
