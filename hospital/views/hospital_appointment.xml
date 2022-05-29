@@ -156,6 +156,8 @@
                 <field name="patient_id"/>
                 <field name="doctor_id"/>
                 <field name="appointment_state"/>
+                <filter name="Confirmed" string="Confirmed"
+                        domain="[('appointment_state', '=', 'confirmed')]"/>
                 <group expand="0" string="Group By">
                     <filter name="patient_id" string="Patient Name" context="{'group_by':'patient_id'}"/>
                     <filter name="doctor_id" string="Doctor Name" context="{'group_by':'doctor_id'}"/>
@@ -204,7 +206,11 @@
         <field name="name">Hospital Appointment</field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form,kanban,graph,calendar</field>
-        <field name="context">{'default_patient_description':'No Description','default_patient_medicine':'No Medicine'}</field>
+        <field name="context">{
+            'default_patient_description':'No Description',
+            'default_patient_medicine':'No Medicine',
+            'search_default_Confirmed':1
+            }</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create First Appointment!

@@ -21,5 +21,3 @@ class AppointmentRequestWizard(models.TransientModel):
                 if discard_days:
                     if rec.create_date + timedelta(days=discard_days) < datetime.now():
                         rec.write({'rejection_id': rejection_reason.id, 'appointment_state': 'rejected'})
-
-
