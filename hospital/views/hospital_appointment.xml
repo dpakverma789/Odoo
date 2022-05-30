@@ -19,7 +19,10 @@
                 <field name="doctor_id"/>
                 <field name="specialization"/>
                 <field name="appointment_time"/>
-                <field name="appointment_state"/>
+                <field name="appointment_state" widget="badge"
+                       decoration-success="appointment_state=='confirmed'"
+                       decoration-danger="appointment_state=='rejected'"
+                       decoration-muted="appointment_state=='Done'"/>
                 <field name="rejection_id"/>
                 <button name="confirm_appointment"
                             confirm="Are you sure to confirm?"
@@ -72,13 +75,17 @@
                     <field name="image" widget='image' class="oe_avatar"/>
                     <group>
                         <group>
-                            <field name="patient_id" options="{'no_create_edit': True,'no_create': True}"
-                            attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                            <field name="patient_id"
+                                   options="{'no_create_edit': True,'no_create': True}"
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"
+                                   widget="many2one_avatar"/>
                             <field name="patient_class_status_ids" widget="many2many_tags"
                                    options="{'color_field': 'color'}"/>
                             <field name="gender" readonly="1" force_save="1"/>
-                            <field name="doctor_id" options="{'no_create_edit': True,'no_create': True}"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                            <field name="doctor_id"
+                                   options="{'no_create_edit': True,'no_create': True}"
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"
+                                   widget="many2one_avatar"/>
                             <field name="specialization" readonly="1"/>
                             <field name="appointment_time"
                                    attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
@@ -137,7 +144,11 @@
                                     <field name="patient_id"/>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <field name="appointment_state"/>
+                                    <field name="appointment_state" widget="badge"
+                                           decoration-success="appointment_state=='confirmed'"
+                                           decoration-danger="appointment_state=='rejected'"
+                                           decoration-muted="appointment_state=='Done'"
+                                    />
                                 </div>
                             </div>
                         </div>
