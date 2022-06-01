@@ -12,19 +12,19 @@ class HospitalAppointment(models.Model):
     _description = "hospital.appointment"
     _order = 'name desc'
 
+    image = fields.Binary("Image")
     name = fields.Char('Appointment', required=True, copy=False, readonly=True, default=lambda self: _('New'))
     gender = fields.Char('Gender')
-    image = fields.Binary("Image")
-    specialization = fields.Char('Specialization', related='doctor_id.specialization')
     patient_id = fields.Many2one('hospital.patient', 'Patient Name', required=True)
     patient_class_status_ids = fields.Many2many(related='patient_id.patient_class_status_ids')
+    patient_description = fields.Text('Description')
+    patient_medicine = fields.Text('Medicine')
     doctor_id = fields.Many2one('hospital.doctor', 'Doctor Name', required=True)
+    specialization = fields.Char('Specialization', related='doctor_id.specialization')
     appointment_time = fields.Datetime('Appointment Time', required=True)
     appointment_state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"), ('Done', 'Done'),
                                           ('rejected', "Rejected")], string="Appointment Status", default='draft')
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
-    patient_description = fields.Text('Description')
-    patient_medicine = fields.Text('Medicine')
     send_email = fields.Boolean(string='Send Email')
 
     # appointment confirm
@@ -111,11 +111,11 @@ class HospitalAppointment(models.Model):
     # update image cron
     def update_image(self):
         records_ids = self.search([])
-        if records_ids:
-            for rec in records_ids:
-                if rec.image != rec.patient_id.image:
-                    rec.image = rec.patient_id.image
-            del records_ids
+        not_sync_img = records_ids.filtered(lambda x: x.image != x.patient_id.image)
+        if not_sync_img:
+            for rec in not_sync_img:
+                rec.image = rec.patient_id.image
+            del records_ids, not_sync_img
         return
 
     # override copy function
@@ -132,3 +132,10 @@ class HospitalAppointment(models.Model):
             records = self.search(['|', ('contact', operator, name), ('name', operator, name)])
             return records.name_get()
         return self.search([('name', operator, name)]+args, limit=limit).name_get()
+
+    # def name_get(self):
+    #     result = []
+    #     for record in self:
+    #         name = record.doctor_id.display_name + ' | ' + record.doctor_id.specialization
+    #         result.append((record.id, name))
+    #     return result

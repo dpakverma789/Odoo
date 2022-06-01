@@ -36,11 +36,3 @@ class HospitalPatient(models.Model):
     #                                    ('contact', '!=', 'False')])
     #     if patient_contact:
     #         raise ValidationError(_('You cannot create patient with same contact.'))
-
-    # @api.depends('name', 'age')
-    # def name_get(self):
-    #     res = []
-    #     for record in self:
-    #         new_name = record.name + ' | ' + str(record.age)
-    #         res.append((record.id, new_name))
-    #     return res

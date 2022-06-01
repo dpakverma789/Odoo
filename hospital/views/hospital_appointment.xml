@@ -77,15 +77,13 @@
                         <group>
                             <field name="patient_id"
                                    options="{'no_create_edit': True,'no_create': True}"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"
-                                   widget="many2one_avatar"/>
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
                             <field name="patient_class_status_ids" widget="many2many_tags"
                                    options="{'color_field': 'color'}"/>
                             <field name="gender" readonly="1" force_save="1"/>
                             <field name="doctor_id"
                                    options="{'no_create_edit': True,'no_create': True}"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"
-                                   widget="many2one_avatar"/>
+                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
                             <field name="specialization" readonly="1"/>
                             <field name="appointment_time"
                                    attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
