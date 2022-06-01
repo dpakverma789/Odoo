@@ -34,7 +34,7 @@
                             <field name="email"/>
                             <field name="gender"/>
                             <field name="patient_class_status_ids" widget="many2many_tags"
-                                   options="{'color_field': 'color'}"/>
+                                   options="{'color_field': 'color', 'no_create_edit': True, 'no_create': True}"/>
                         </group>
                     </group>
                     <notebook>

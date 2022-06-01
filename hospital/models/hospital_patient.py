@@ -12,13 +12,14 @@ class HospitalPatient(models.Model):
     name = fields.Char('Patient Name', required=True, default=lambda self: self.env.user.name)
     image = fields.Binary("Image", copy=False)
     age = fields.Integer('Patient Age', default=10)
-    contact = fields.Char('Patient Contact', copy=False)
+    contact = fields.Char('Patient Contact', required=True, copy=False)
     email = fields.Char('Patient Email', copy=False)
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female')])
+    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], required=True)
     appointment_ids = fields.One2many('hospital.appointment', inverse_name='patient_id',
                                       string='Appointments', readonly=True)
     patient_class_status_ids = fields.Many2many('patient.class.status', 'appointment_patient_status_rel',
-                                                'appointment_id', 'patient_status_id', string='Patient Status')
+                                                'appointment_id', 'patient_status_id', string='Patient Status',
+                                                required=True)
 
     _sql_constraints = [('patient_contact_unique', 'unique(contact, email)',
                          'Patient can not have same contact or email'),
