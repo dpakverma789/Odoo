@@ -51,7 +51,7 @@
     </record>
 
     <!-- root menu  -->
-    <menuitem id="money_management_root_menu" name="Money Management"/>
+    <menuitem id="money_management_root_menu" name="Wallet"/>
 
     <!-- Expense Category menu  -->
     <menuitem id="expense_category_menu" name="Expense Category" parent="money_management_root_menu"

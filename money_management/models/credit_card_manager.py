@@ -10,11 +10,11 @@ class CreditCardManager(models.Model):
 
     name = fields.Char(string='Credit Card', required=True)
     currency_id = fields.Many2one('res.currency', string='Amount Currency')
-    amount = fields.Monetary(string='Amount Due')
+    amount = fields.Monetary(string='Amount Due', copy=False)
     due_date = fields.Date('Due Date', required=True)
-    paid_date = fields.Datetime('Paid Date', default=lambda self: fields.Datetime.now())
+    paid_date = fields.Datetime('Paid Date', default=lambda self: fields.Datetime.now(), copy=False)
     payment_state = fields.Selection([('pending', "Pending"), ('done', 'Completed')],
-                                     string="Payment Status", default='pending')
+                                     string="Payment Status", default='pending', copy=False)
 
     @api.constrains('amount')
     def expense_amount_check(self):
@@ -22,5 +22,11 @@ class CreditCardManager(models.Model):
             raise ValidationError(_('Amount can not be zero for transaction'))
 
     def confirm_payment(self):
+        self.env['expense.transaction'].create({
+            'name': self.name,
+            'category': self.env['expense.category'].search([('name', '=', 'Credit Card')]).id,
+            'amount': self.amount,
+            'date': self.paid_date,
+            'expense_type': 'need'
+        })
         self.payment_state = 'done'
-

@@ -12,7 +12,7 @@
                 <field name="amount"/>
                 <field name="due_date"/>
                 <field name="paid_date"/>
-                <field name="payment_state"/>
+                <field name="payment_state" widget="badge" decoration-success="payment_state=='done'"/>
             </tree>
         </field>
     </record>
