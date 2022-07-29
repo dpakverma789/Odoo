@@ -19,7 +19,7 @@ class HospitalDoctor(models.Model):
     @api.depends('patient_appointment_ids')
     def _compute_total_appointment(self):
         if len(self) == 1 and self.patient_appointment_ids:
-            appointment_count = self.patient_appointment_ids.filtered(lambda i: i.appointment_state == 'confirmed')
+            appointment_count = self.patient_appointment_ids.filtered(lambda i: i.appointment_state == 'Confirmed')
             if appointment_count:
                 self.total_appointment = len(appointment_count.ids)
                 return
