@@ -90,7 +90,7 @@ class HospitalAppointment(models.Model):
     def expire_appointment(self):
         total_appointment = self.search([('appointment_state', '=', 'Confirmed')])
         for rec in total_appointment:
-            if rec.appointment_time < datetime.now() or 1:
+            if rec.appointment_time < datetime.now():
                 rec.write({'appointment_state': 'Expired'})
 
     # wizard call using python function

@@ -28,13 +28,13 @@
                             confirm="Are you sure to confirm?"
                             groups="hospital.group_hospital_doctor"
                             type="object" class="fa fa-check btn-success"
-                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done','Expired'))]}"/>
                 <button name="rejection_reason_wizard" class="fa fa-times btn-danger"
                             type="object" groups="hospital.group_hospital_doctor"
-                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done','Expired'))]}"/>
                 <button name="print_patient_appointment_card"
                         type="object" class="fa fa-arrow-down btn-primary"
-                        attrs="{'invisible':[('appointment_state','in',('Draft','Rejected'))]}"/>
+                        attrs="{'invisible':[('appointment_state','in',('Draft','Rejected','Expired'))]}"/>
             </tree>
         </field>
     </record>
@@ -66,7 +66,7 @@
                 <sheet>
                     <widget name="web_ribbon" title="Confirmed"
                             bg_color="bg-success"
-                            attrs="{'invisible':[('appointment_state','in',('Draft','Rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Draft','Rejected','Done','Expired'))]}"/>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1"/>
