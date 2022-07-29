@@ -27,7 +27,7 @@ class HospitalDoctor(models.Model):
         #     doctor_appointment_count = {}
         #     for rec in self:
         #         confirm_appointment = rec.patient_appointment_ids
-        #         .filtered(lambda x: x.appointment_state == 'confirmed')
+        #         .filtered(lambda x: x.appointment_state == 'Confirmed')
         #         doctor_appointment_count.update({rec.name: len(confirm_appointment)})
         #     return doctor_appointment_count
         self.total_appointment = 0

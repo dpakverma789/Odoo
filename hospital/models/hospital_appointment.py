@@ -22,26 +22,24 @@ class HospitalAppointment(models.Model):
     doctor_id = fields.Many2one('hospital.doctor', 'Doctor Name', required=True)
     specialization = fields.Char('Specialization', related='doctor_id.specialization')
     appointment_time = fields.Datetime('Appointment Time', required=True)
-    appointment_state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"), ('Done', 'Done'),
-                                          ('rejected', "Rejected")], string="Appointment Status", default='draft')
+    appointment_state = fields.Selection([('Draft', "Draft"), ('Confirmed', "Confirmed"), ('Done', 'Done'),
+                                          ('Rejected', "Rejected"), ('Expired', 'Expired')],
+                                         string="Appointment Status", default='Draft')
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
     send_email = fields.Boolean(string='Send Email')
 
     # appointment confirm
     def confirm_appointment(self):
-        all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'confirmed'),
+        all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'Confirmed'),
                                            ('doctor_id', '=', self.doctor_id.id)])
         if all_appointment_ids:
             for rec in all_appointment_ids:
-                conditions = (
-                        self.appointment_time > rec.appointment_time + timedelta(minutes=15),
-                        rec.appointment_time < self.appointment_time - timedelta(minutes=15)
-                )
+                conditions = (self.appointment_time > rec.appointment_time + timedelta(minutes=15),
+                              rec.appointment_time < self.appointment_time - timedelta(minutes=15))
                 if not all(conditions):
-                    raise ValidationError(_('Dr. %s Already have Appointment! Try 15 min Later'
-                                            % self.doctor_id.name))
+                    raise ValidationError(_('Dr. %s Already have Appointment! Try 15 min Later' % self.doctor_id.name))
             del all_appointment_ids, conditions
-        self.appointment_state = 'confirmed'
+        self.appointment_state = 'Confirmed'
         return {
             'effect': {
                 'fadeout': 'slow',
@@ -59,7 +57,7 @@ class HospitalAppointment(models.Model):
     # overriding delete function to check condition before deleting records
     def unlink(self):
         for rec in self:
-            if rec.appointment_state == 'confirmed':
+            if rec.appointment_state == 'Confirmed':
                 raise ValidationError(_('Can not Delete Confirmed Appointment'))
         return super(HospitalAppointment, self).unlink()
 
@@ -90,10 +88,10 @@ class HospitalAppointment(models.Model):
 
     # expires confirm appointment
     def expire_appointment(self):
-        total_appointment = self.search([('appointment_state', '=', 'confirmed')])
+        total_appointment = self.search([('appointment_state', '=', 'Confirmed')])
         for rec in total_appointment:
-            if rec.appointment_time < datetime.now():
-                rec.write({'appointment_state': 'Done'})
+            if rec.appointment_time < datetime.now() or 1:
+                rec.write({'appointment_state': 'Expired'})
 
     # wizard call using python function
     def rejection_reason_wizard(self):

@@ -6,8 +6,8 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <tree string="hospital_appointment_details"
-                  decoration-success="appointment_state=='confirmed'"
-                  decoration-danger="appointment_state=='rejected'"
+                  decoration-success="appointment_state=='Confirmed'"
+                  decoration-danger="appointment_state=='Rejected'"
                   decoration-muted="appointment_state=='Done'"
                   sample="1"
                   multi_edit="1">
@@ -20,21 +20,21 @@
                 <field name="specialization"/>
                 <field name="appointment_time"/>
                 <field name="appointment_state" widget="badge"
-                       decoration-success="appointment_state=='confirmed'"
-                       decoration-danger="appointment_state=='rejected'"
+                       decoration-success="appointment_state=='Confirmed'"
+                       decoration-danger="appointment_state=='Rejected'"
                        decoration-muted="appointment_state=='Done'"/>
                 <field name="rejection_id"/>
                 <button name="confirm_appointment"
                             confirm="Are you sure to confirm?"
                             groups="hospital.group_hospital_doctor"
                             type="object" class="fa fa-check btn-success"
-                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done'))]}"/>
                 <button name="rejection_reason_wizard" class="fa fa-times btn-danger"
                             type="object" groups="hospital.group_hospital_doctor"
-                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done'))]}"/>
                 <button name="print_patient_appointment_card"
                         type="object" class="fa fa-arrow-down btn-primary"
-                        attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
+                        attrs="{'invisible':[('appointment_state','in',('Draft','Rejected'))]}"/>
             </tree>
         </field>
     </record>
@@ -50,23 +50,23 @@
                             confirm="Are you sure to confirm?"
                             groups="hospital.group_hospital_doctor"
                             type="object" class="oe_highlight"
-                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done','Expired'))]}"/>
 <!--                    <button name="%(hospital.action_hospital_appointment_request_wizard)d" string="Reject"-->
 <!--                            type="action" groups="hospital.group_hospital_doctor"-->
-<!--                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected'))]}"/>-->
+<!--                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected'))]}"/>-->
                     <button name="rejection_reason_wizard" string="Reject"
                             type="object" groups="hospital.group_hospital_doctor"
-                            attrs="{'invisible':[('appointment_state','in',('confirmed','rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done','Expired'))]}"/>
                     <button name="print_patient_appointment_card"
                             string="Print &#38; Send Email Appointment Card"
                             type="object" class="oe_highlight"
-                            attrs="{'invisible':[('appointment_state','in',('draft','rejected'))]}"/>
-                    <field name="appointment_state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                            attrs="{'invisible':[('appointment_state','in',('Draft','Rejected'))]}"/>
+                    <field name="appointment_state" widget="statusbar" statusbar_visible="Draft,Confirmed"/>
                 </header>
                 <sheet>
                     <widget name="web_ribbon" title="Confirmed"
                             bg_color="bg-success"
-                            attrs="{'invisible':[('appointment_state','in',('draft','rejected','Done'))]}"/>
+                            attrs="{'invisible':[('appointment_state','in',('Draft','Rejected','Done'))]}"/>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1"/>
@@ -77,24 +77,24 @@
                         <group>
                             <field name="patient_id"
                                    options="{'no_create_edit': True,'no_create': True}"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                                   attrs="{'readonly': [('appointment_state','!=','Draft')]}"/>
                             <field name="patient_class_status_ids" widget="many2many_tags"
                                    options="{'color_field': 'color'}"/>
                             <field name="gender" readonly="1" force_save="1"/>
                             <field name="doctor_id"
                                    options="{'no_create_edit': True,'no_create': True}"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                                   attrs="{'readonly': [('appointment_state','!=','Draft')]}"/>
                             <field name="specialization" readonly="1"/>
                             <field name="appointment_time"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                                   attrs="{'readonly': [('appointment_state','!=','Draft')]}"/>
                             <field name="rejection_id" options="{'no_create_edit': True,'no_create': True}"
-                             attrs="{'invisible':[('rejection_id','=',False)], 'readonly': [('appointment_state','!=','draft')]}"/>
+                             attrs="{'invisible':[('rejection_id','=',False)], 'readonly': [('appointment_state','!=','Draft')]}"/>
                         </group>
                         <group>
                             <field name="patient_description"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                                   attrs="{'readonly': [('appointment_state','!=','Draft')]}"/>
                             <field name="patient_medicine"
-                                   attrs="{'readonly': [('appointment_state','!=','draft')]}"/>
+                                   attrs="{'readonly': [('appointment_state','!=','Draft')]}"/>
                             <field name="send_email" widget="boolean_toggle"/>
                         </group>
                     </group>
@@ -143,8 +143,8 @@
                                 </div>
                                 <div class="col-6 text-right">
                                     <field name="appointment_state" widget="badge"
-                                           decoration-success="appointment_state=='confirmed'"
-                                           decoration-danger="appointment_state=='rejected'"
+                                           decoration-success="appointment_state=='Confirmed'"
+                                           decoration-danger="appointment_state=='Rejected'"
                                            decoration-muted="appointment_state=='Done'"
                                     />
                                 </div>
@@ -166,7 +166,7 @@
                 <field name="doctor_id"/>
                 <field name="appointment_state"/>
                 <filter name="Confirmed" string="Confirmed"
-                        domain="[('appointment_state', '=', 'confirmed')]"/>
+                        domain="[('appointment_state', '=', 'Confirmed')]"/>
                 <group expand="0" string="Group By">
                     <filter name="patient_id" string="Patient Name" context="{'group_by':'patient_id'}"/>
                     <filter name="doctor_id" string="Doctor Name" context="{'group_by':'doctor_id'}"/>
