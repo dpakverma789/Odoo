@@ -18,14 +18,13 @@
 
         # reports files
 
-
-        # data files
-        'data/cron.xml',
-
         # views files
         'views/expense_category.xml',
         'views/expense_transaction.xml',
-        'views/credit_card_manager.xml'
+        'views/credit_card_manager.xml',
+
+        # data files
+        'data/cron.xml',
 
     ],
     'demo': [
