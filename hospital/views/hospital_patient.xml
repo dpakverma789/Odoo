@@ -112,6 +112,10 @@
         <field name="name">Hospital Patient</field>
         <field name="res_model">hospital.patient</field>
         <field name="view_mode">tree,form,kanban</field>
+       <field name="view_ids" eval="[(5, 0, 0),
+        (0, 0, {'view_mode': 'tree', 'view_id': ref('hospital_patient_tree')}),
+        (0, 0, {'view_mode': 'kanban', 'view_id': ref('hospital_patient_kanban')}),
+        (0, 0, {'view_mode': 'form', 'view_id': ref('hospital_patient_form')})]"/>
 <!--        <field name="context">{'default_contact':'1234567890'}</field>-->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -119,10 +123,4 @@
             </p>
         </field>
     </record>
-
-    <!-- root menu  -->
-    <menuitem id="hospital_root_menu" name="Hospital"/>
-
-    <!-- Patients menu  -->
-    <menuitem id="hospital_patient_menu" name="Patients" parent="hospital_root_menu" action="hospital_patient_action"/>
 </odoo>

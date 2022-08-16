@@ -104,6 +104,4 @@
         </field>
     </record>
 
-    <!-- Doctors menu  -->
-    <menuitem id="hospital_doctor_menu" name="Doctors" parent="hospital_root_menu" action="hospital_doctor_action"/>
 </odoo>

@@ -227,8 +227,4 @@
         </field>
     </record>
 
-    <!-- Appointment Menu  -->
-    <menuitem id="hospital_appointment_menu" name="Appointments" parent="hospital_root_menu"
-              action="hospital_appointment_action"/>
-
 </odoo>

@@ -44,7 +44,4 @@
         <field name="rejection_reason">Discard by Bot</field>
     </record>
 
-    <!-- Rejection Reason menu  -->
-    <menuitem id="hospital_rejection_reason_menu" name="Rejection Reasons"
-              parent="hospital_root_menu" action="rejection_reason_action"/>
 </odoo>

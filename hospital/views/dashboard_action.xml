@@ -4,8 +4,4 @@
         <field name="name">Dashboard</field>
         <field name="tag">hospital_dashboard</field>
     </record>
-
-    <!-- Dashboard menu  -->
-    <menuitem id="hospital_dashboard_menu" name="Dashboard" parent="hospital_root_menu"
-    action="hospital_dashboard" sequence="1"/>
 </odoo>

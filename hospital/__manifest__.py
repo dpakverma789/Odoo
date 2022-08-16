@@ -34,6 +34,7 @@
         'views/assets.xml',
         'views/dashboard_action.xml',
         'views/res_config_settings.xml',
+        'views/menus.xml',
     ],
     'demo': [
         # demo data files
