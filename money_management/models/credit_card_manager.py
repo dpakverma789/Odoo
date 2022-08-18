@@ -22,6 +22,12 @@ class CreditCardManager(models.Model):
         if self.amount <= 0:
             raise ValidationError(_('Amount can not be zero for transaction'))
 
+    def unlink(self):
+        for rec in self:
+            if rec.payment_state == 'done':
+                raise ValidationError(_('Can not Delete Paid Bill'))
+        return super(CreditCardManager, self).unlink()
+
     def confirm_payment(self):
         self.env['expense.transaction'].create({
             'name': self.name,
