@@ -22,6 +22,7 @@
         'views/expense_category.xml',
         'views/expense_transaction.xml',
         'views/credit_card_manager.xml',
+        'views/expense_bank_card.xml',
 
         # data files
         'data/cron.xml',

@@ -9,6 +9,7 @@
                   decoration-muted="payment_state=='done'"
                   sample="1">
                 <field name="name"/>
+                <field name="bank_card_id"/>
                 <field name="amount"/>
                 <field name="due_date"/>
                 <field name="paid_date"/>
@@ -37,6 +38,7 @@
                     <group>
                         <group>
                             <field name="name" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
+                            <field name="bank_card_id" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
                             <field name="due_date" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
                             <field name="paid_date" attrs="{'readonly':[('payment_state','in',('done'))]}"/>
                             <field name="amount" widget="monetary"
