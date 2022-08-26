@@ -17,4 +17,4 @@ class PatientForm(http.Controller):
             except ValueError:
                 kwargs.pop('gender')
                 request.env['hospital.patient'].sudo().create(kwargs)
-        return request.render("hospital.contactus_thanks")
+            return request.render("hospital.contactus_thanks")

@@ -20,6 +20,7 @@ class HospitalPatient(models.Model):
     patient_class_status_ids = fields.Many2many('patient.class.status', 'appointment_patient_status_rel',
                                                 'appointment_id', 'patient_status_id', string='Patient Status',
                                                 required=True)
+    hide_rejection_reason = fields.Boolean('Hide Rejection Reason')
 
     _sql_constraints = [('patient_contact_unique', 'unique(contact, email)',
                          'Patient can not have same contact or email'),

@@ -215,6 +215,7 @@
         <field name="name">Hospital Appointment</field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form,kanban,graph,calendar</field>
+<!--        <field name="domain">[('appointment_state', '=', 'Expired')]</field>-->
         <field name="context">{
             'default_patient_description':'No Description',
             'default_patient_medicine':'No Medicine',

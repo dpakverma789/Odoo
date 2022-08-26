@@ -9,7 +9,8 @@
             <form string="rejection_reason_details">
                 <sheet>
                     <group>
-                        <field name="rejection_reason"/>
+                        <field name="rejection_reason" placeholder="Your Rejection Reason"
+                        help="This will help to reject the appointment with a valid reason."/>
                     </group>
                 </sheet>
             </form>
