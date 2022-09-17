@@ -28,6 +28,19 @@ class HospitalAppointment(models.Model):
     rejection_id = fields.Many2one('appointment.rejection.reason', 'Rejection Reason', readonly=True)
     send_email = fields.Boolean(string='Send Email')
 
+    # Send appointment on whatsapp
+    def send_appointment_on_whatsapp(self):
+        text = f'Hi {self.patient_id.name}'
+        whatsapp_url = 'https://api.whatsapp.com/send?phone=%s&text=%s' % (self.patient_id.contact, text)
+        send = {
+            'type': 'ir.actions.act_url',
+            'name': "Shipment Tracking Page",
+            'target': 'new',
+            'url': whatsapp_url,
+        }
+        return send
+
+
     # appointment confirm
     def confirm_appointment(self):
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'Confirmed'),

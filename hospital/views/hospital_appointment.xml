@@ -25,14 +25,17 @@
                        decoration-muted="appointment_state=='Done'"/>
                 <field name="rejection_id"/>
                 <button name="confirm_appointment"
+                            string=" "
                             confirm="Are you sure to confirm?"
                             groups="hospital.group_hospital_doctor"
                             type="object" class="fa fa-check btn-success"
                             attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done','Expired'))]}"/>
                 <button name="rejection_reason_wizard" class="fa fa-times btn-danger"
+                            string=" "
                             type="object" groups="hospital.group_hospital_doctor"
                             attrs="{'invisible':[('appointment_state','in',('Confirmed','Rejected','Done','Expired'))]}"/>
                 <button name="print_patient_appointment_card"
+                        string=" "
                         type="object" class="fa fa-arrow-down btn-primary"
                         attrs="{'invisible':[('appointment_state','in',('Draft','Rejected','Expired'))]}"/>
             </tree>
@@ -60,6 +63,9 @@
                     <button name="print_patient_appointment_card"
                             string="Print &#38; Send Email Appointment Card"
                             type="object" class="oe_highlight"
+                            attrs="{'invisible':[('appointment_state','in',('Draft','Rejected'))]}"/>
+                    <button name="send_appointment_on_whatsapp" string="Send On WhatsApp"
+                            type="object" class="fa fa-whatsapp oe_highlight"
                             attrs="{'invisible':[('appointment_state','in',('Draft','Rejected'))]}"/>
                     <field name="appointment_state" widget="statusbar" statusbar_visible="Draft,Confirmed"/>
                 </header>
