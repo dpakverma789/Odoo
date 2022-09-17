@@ -61,6 +61,7 @@ class HospitalAppointment(models.Model):
                     raise ValidationError(_('Dr. %s Already have Appointment! Try 15 min Later' % self.doctor_id.name))
             del all_appointment_ids, conditions
         self.appointment_state = 'Confirmed'
+        self.env['hospital.doctor'].total_appointment_count(self.doctor_id)
         return {
             'effect': {
                 'fadeout': 'slow',
