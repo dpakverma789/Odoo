@@ -18,6 +18,12 @@ class HospitalDoctor(models.Model):
 
     @staticmethod
     def total_appointment_count(doctor_id):
+        """
+        this static function checks the total appointment count of the doctor and store the count to
+        variable total appointment. this function gets trigger when appointment confirm button is clicked
+        :param doctor_id:
+        :return:
+        """
         if doctor_id and doctor_id.patient_appointment_ids:
             appointment_count = doctor_id.patient_appointment_ids.filtered(lambda i: i.appointment_state == 'Confirmed')
             if appointment_count:
