@@ -30,6 +30,10 @@ class HospitalAppointment(models.Model):
 
     # Send appointment on whatsapp
     def send_appointment_on_whatsapp(self):
+        """
+        this function send whatsapp message
+        :return: call whatsapp api
+        """
         text = f'Hi {self.patient_id.name}'
         whatsapp_url = 'https://api.whatsapp.com/send?phone=%s&text=%s' % (self.patient_id.contact, text)
         send = {
@@ -40,9 +44,13 @@ class HospitalAppointment(models.Model):
         }
         return send
 
-
-    # appointment confirm
+    # confirms the appointment
     def confirm_appointment(self):
+        """
+        this function confirms the appointment of the patient with a selected doctor and check
+        if the selected doctor has already appointment or not in the given time slot
+        :return:
+        """
         all_appointment_ids = self.search([('id', '!=', self.id), ('appointment_state', '=', 'Confirmed'),
                                            ('doctor_id', '=', self.doctor_id.id)])
         if all_appointment_ids:
@@ -61,14 +69,22 @@ class HospitalAppointment(models.Model):
                 'type': 'rainbow_man',
             }}
 
-    # avoid past date appointment booking
+    # check past date appointment booking
     @api.constrains('appointment_time')
     def _check_appointment_date(self):
+        """
+        this function blocks the appointment booking if selected date is in the past
+        :return:
+        """
         if self.appointment_time < datetime.now():
             raise ValidationError(_('Make an Appointment for Future date!'))
 
     # overriding delete function to check condition before deleting records
     def unlink(self):
+        """
+        this function checks if the booking is confirmed it blocks the appointment deletion
+        :return:
+        """
         for rec in self:
             if rec.appointment_state == 'Confirmed':
                 raise ValidationError(_('Can not Delete Confirmed Appointment'))
@@ -77,6 +93,11 @@ class HospitalAppointment(models.Model):
     # overriding create method [vals are all fields from current model]
     @api.model
     def create(self, vals):
+        """
+        this function generates the unique appointment ids for each new appointment created
+        :param vals:
+        :return:
+        """
         if vals.get('name', _('New')) == _('New'):
             vals['name'] = self.env['ir.sequence'].next_by_code('hospital.appointment') or _('New')
         res = super(HospitalAppointment, self).create(vals)
@@ -84,6 +105,11 @@ class HospitalAppointment(models.Model):
 
     # printing report and send email
     def print_patient_appointment_card(self):
+        """
+        this function send appointment email template when send email is true and
+        download pdf appointment template
+        :return:
+        """
         for rec in self:
             email_template_id = self.env.ref('hospital.patient_appointment_email_template').id
             if email_template_id and rec.send_email:
@@ -94,13 +120,21 @@ class HospitalAppointment(models.Model):
     # onchange function which depends on patient_id to change patient gender
     @api.onchange('patient_id')
     def _onchange_gender(self):
+        """
+        this function updates the patient gender and image as per the patient selection
+        :return:
+        """
         if self.patient_id and self.patient_id.gender:
             self.gender = self.patient_id.gender
             if self.patient_id.image:
                 self.image = self.patient_id.image
 
-    # expires confirm appointment
+    # expires the confirm appointment
     def expire_appointment(self):
+        """
+        this function expires the confirmed appointments once appointment date has been passed
+        :return:
+        """
         total_appointment = self.search([('appointment_state', '=', 'Confirmed')])
         for rec in total_appointment:
             if rec.appointment_time < datetime.now():
@@ -108,6 +142,10 @@ class HospitalAppointment(models.Model):
 
     # wizard call using python function
     def rejection_reason_wizard(self):
+        """
+        its a rejection reason popup function
+        :return:
+        """
         wizard_view = {
             'name': _('Rejection Reason'),
             'type': 'ir.actions.act_window',
@@ -121,6 +159,10 @@ class HospitalAppointment(models.Model):
 
     # update image cron
     def update_image(self):
+        """
+        this function updates the patient image in appointment table if patient image is updated on patient table
+        :return:
+        """
         records_ids = self.search([])
         not_sync_img = records_ids.filtered(lambda x: x.image != x.patient_id.image)
         if not_sync_img:
