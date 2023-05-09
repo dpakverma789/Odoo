@@ -1,8 +1,14 @@
 import datetime
-
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import ValidationError
 from datetime import datetime, timedelta
+
+try:
+    from twilio.rest import Client
+except ModuleNotFoundError:
+    import os
+    os.system('pip install twilio')
+    from twilio.rest import Client
 
 
 class HospitalAppointment(models.Model):
@@ -32,17 +38,18 @@ class HospitalAppointment(models.Model):
     def send_appointment_on_whatsapp(self):
         """
         this function send whatsapp message
-        :return: call whatsapp api
+        :return: None
         """
-        text = f'Hi {self.patient_id.name}'
-        whatsapp_url = 'https://api.whatsapp.com/send?phone=%s&text=%s' % (self.patient_id.contact, text)
-        send = {
-            'type': 'ir.actions.act_url',
-            'name': "Shipment Tracking Page",
-            'target': 'new',
-            'url': whatsapp_url,
-        }
-        return send
+        account_sid = 'AC82cc589c8aaf71cf047e34c2583675cb'
+        auth_token = '2aaf7664e12e34d5bbd18ddab46d5c30'
+        client = Client(account_sid, auth_token)
+        message_body = f'Hi {self.patient_id.name}\n' \
+                       f'Your Appointment has been {self.appointment_state} with Dr. {self.doctor_id.name}'
+        client.messages.create(
+            from_='whatsapp:+14155238886',
+            body= message_body,
+            to=f'whatsapp:{self.patient_id.contact}'
+        )
 
     # confirms the appointment
     def confirm_appointment(self):
