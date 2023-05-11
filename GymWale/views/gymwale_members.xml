@@ -22,13 +22,18 @@
         <field name="model">gymwale.members</field>
         <field name="arch" type="xml">
             <form string="gymwale_members_form_details">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="confirm_payment" string="Paid"
+                            confirm="Member Paid the Amount?"
+                            groups=""
+                            type="object" class="oe_highlight"
+                            attrs="{'invisible':[('state','in',('paid','expire'))]}"/>
+                </header>
                 <sheet>
                     <widget name="web_ribbon" title="Paid"
                             bg_color="bg-success"
                             attrs="{'invisible':[('is_amount_paid','=',False)]}"/>
-                    <widget name="web_ribbon" title="Expired"
-                            bg_color="bg-danger"
-                            attrs="{'invisible':[('is_amount_paid','=',True)]}"/>
                     <field name="image" widget='image' class="oe_avatar"/>
                     <div class="oe_title">
                         <h1>
@@ -42,6 +47,7 @@
                             <field name="gender"/>
                             <field name="contact"/>
                             <field name="email"/>
+                            <field name="aadhaar_number"/>
                         </group>
                         <group>
                             <field name="address"/>
@@ -56,12 +62,12 @@
                             <field name="membership_plan"/>
                             <field name="discount"/>
                             <field name="referral"/>
-                            <field name="amount_to_be_paid"/>
+                            <field name="amount_to_be_paid" readonly="1" force_save="True"/>
                         </group>
                         <group>
                             <field name="is_amount_paid"/>
                             <field name="membership_assigned"/>
-                            <field name="membership_expire"/>
+                            <field name="membership_expire" readonly="1" force_save="True"/>
                         </group>
                     </group>
                 </sheet>

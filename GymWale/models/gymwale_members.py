@@ -15,7 +15,7 @@ class GymMembers(models.Model):
     name = fields.Char('Name', required=True)
     age = fields.Integer('Age')
     contact = fields.Char('Contact', required=True, copy=False)
-    aadhaar_number = fields.Integer('Aadhaar Number')
+    aadhaar_number = fields.Char('Aadhaar Number')
     address = fields.Text('Address')
     email = fields.Char('Email', copy=False)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string='Gender', required=True)
@@ -27,11 +27,17 @@ class GymMembers(models.Model):
                                  required=True, string='Objective')
     membership_plan = fields.Many2one('gymwale.membership_plan')
     amount_to_be_paid = fields.Integer(string='Amount to be Paid')
-    is_amount_paid = fields.Boolean(string='Is Amount Paid?', compute='expiry_check')
+    is_amount_paid = fields.Boolean(string='Is Amount Paid?')
     membership_assigned = fields.Date('Membership Assigned')
     membership_expire = fields.Date('Membership Expire')
-    discount = fields.Integer('Discount')
+    discount = fields.Integer('Discount', default=0)
     referral = fields.Many2one('gymwale.members')
+    state = fields.Selection([('registered', 'Registered'), ('paid', 'Paid'), ('expire', 'expire')],
+                             string='state', default='registered')
+
+    def confirm_payment(self):
+        self.is_amount_paid = True
+        self.write({'state': 'paid'})
 
     @api.depends('membership_expire')
     def expiry_check(self):
@@ -44,7 +50,7 @@ class GymMembers(models.Model):
     def compute_expiry_date(self):
         self.membership_expire = False
         membership_period = self.membership_plan.membership_period
-        if membership_period:
+        if membership_period and self.membership_assigned:
             self.membership_expire = self.membership_assigned + timedelta(days=membership_period)
 
     @api.onchange('membership_plan', 'discount')
