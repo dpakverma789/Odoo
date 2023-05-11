@@ -41,7 +41,7 @@ class HospitalAppointment(models.Model):
         :return: None
         """
         account_sid = 'AC82cc589c8aaf71cf047e34c2583675cb'
-        auth_token = '2aaf7664e12e34d5bbd18ddab46d5c30'
+        auth_token = 'a93ac15f2a27859026ba8061832035ea'
         client = Client(account_sid, auth_token)
         message_body = f'Hi {self.patient_id.name}\n' \
                        f'Your Appointment has been {self.appointment_state} with Dr. {self.doctor_id.name}'
