@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- root menu  -->
+    <menuitem id="gymwale_root_menu" name="GymWale"/>
+
+    <!-- Members menu  -->
+    <menuitem id="members_menu" name="Members" parent="gymwale_root_menu" action="members_action"/>
+
+    <!-- Membership Plan  -->
+    <menuitem id="membership_plan_menu" name="Membership Plan" parent="gymwale_root_menu" action="membership_plan_action"/>
+</odoo>
